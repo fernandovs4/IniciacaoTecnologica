@@ -36,3 +36,41 @@
     transform: rotate(360deg);
   }
 }
+
+
+#mySelect{
+  width: 400px;
+}
+
+.buscadaor_header_search{
+  display: flex;
+  justify-content: space-between;
+}
+.itens_esquerdo_buscador, .itens_direito_buscador{
+  background-color: rgb(17, 255, 0);
+ 
+  
+}
+.container_esquerdo_buscador, .container_direito_buscador{
+  width:60vh;
+}
+li{
+  display: flex;
+  flex-wrap: wrap;
+  list-style-type: none;
+  padding: 5px;
+  margin:2px;
+  border-radius: 6px;
+  cursor: pointer;
+  
+}
+.container_buscador{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: aliceblue;
+}
+
+.selecionado{
+  background-color: rgb(57, 197, 75) !important;
+}

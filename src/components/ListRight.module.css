@@ -1,0 +1,18 @@
+.ul{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+  
+
+}
+
+.li{
+    display: block;
+    list-style: none;
+    padding: 8px;
+    background-color: rgb(53, 155, 53);
+    margin-bottom: 5px;
+    color: black;
+   
+    
+}

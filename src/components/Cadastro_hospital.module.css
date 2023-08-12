@@ -1,0 +1,40 @@
+.container{
+    display: flex;
+  
+    
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align:center ;
+    width: 400px;
+    left: 70% ;
+    top: 40%;
+    height: 200px;
+    background-color: rgba(73, 249, 94, 0.685);
+    color: black;
+    margin: auto;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px 3px 1px solid black;
+    position: fixed;
+    
+ 
+}
+
+.button{
+    padding: 3px 6px;
+    border-radius: 4px;
+    border: none;
+    background-color: rgb(122, 244, 150);
+    margin: 10px;
+    cursor: pointer;
+
+}
+.input{
+    padding: 5px;
+    width: 80%;
+}
+
+.button:hover{
+    background-color: rgb(165, 215, 165);
+}

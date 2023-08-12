@@ -1,0 +1,55 @@
+.buscadaor_header_container{
+
+    padding: 2em;
+    display: flex;
+    align-items: center;
+    
+}
+
+
+.link {
+    display: flex   ;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-weight: 900;
+    cursor: pointer;
+    background-color: rgb(85, 230, 97);
+    padding: 2px 10px;
+    border-radius: 5px;
+    align-items: center;
+    border: none;
+      
+
+
+}
+.link:hover{
+    background-color: rgb(113, 198, 120);
+}
+
+
+
+.buscadaor_header_search{
+    display: flex;
+    gap: 0.4em;
+    justify-content: space-between;
+    align-items: center;
+    
+
+}
+
+.input{
+    padding: 4px;
+}
+
+.buscador_header_btn_pesquisar{
+    display: flex;
+    padding: 5px;
+    color: rgb(0, 0, 0);
+    
+
+
+}
+
+.button{
+
+}

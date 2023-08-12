@@ -1,0 +1,17 @@
+.button{
+    margin: 0.2em;
+    background-color: rgb(43, 246, 53);
+    pad: -moz-element();
+    padding:0.2em 1em;
+    border-radius: 3px;
+    color: white;
+    cursor: pointer;
+ 
+ 
+}
+
+.cursor:hover{    
+    background-color: rgb(145, 206, 128);
+    
+}
+

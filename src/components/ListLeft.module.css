@@ -1,0 +1,21 @@
+.ul{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    
+
+}
+
+.li{
+    display: block;
+    list-style: none;
+    padding: 8px;
+    background-color: rgb(42, 155, 183);
+    margin-bottom: 5px;
+    color: black;
+
+}
+
+.li_pre_selected{
+    background-color: green !important;
+}
