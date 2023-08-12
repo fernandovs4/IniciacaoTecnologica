@@ -67,6 +67,7 @@ const Buscador = () => {
                             toggleHospitalSelection={toggleHospitalSelection}
                         />
                         <ListRight
+                        
                             hospitaisSelecionados={hospitaisSelecionados}
                             toggleHospitalSelection={toggleHospitalSelection}
                         />
