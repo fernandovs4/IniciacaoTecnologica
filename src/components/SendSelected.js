@@ -1,32 +1,44 @@
 import styles from './SendSelected.module.css'
 
-function SendSelected({hospitaisSelecionados,selectedHospital, setHospitaisSelecionados}){
+function SendSelected({hospitaisEncontrados, hospitaisSelecionados,selectedHospital, setHospitaisSelecionados}){
     const enviarSelecionados  = () =>  {
-        const sendData = {
-            [selectedHospital]: hospitaisSelecionados
+        if(hospitaisSelecionados.length == 0 && hospitaisEncontrados.length == 0){
+            alert("Nenhum hospital selecionado!")
+        }else{
+            console.log(hospitaisEncontrados)
+            const resposta =  window.confirm("Confirma o envio dos hospitais selecionados para o hospital " + selectedHospital + " ?")
+
+        if (resposta){
+            const sendData = {
+                [selectedHospital]: hospitaisSelecionados
+            }
+    
+            
+    
+             fetch("http://localhost:5000/apelidos", {
+                method:"POST",
+                body:JSON.stringify(sendData),
+                headers: {
+                    "Content-Type": "application/json", // Definir o Content-Type como JSON
+                  }
+             })
+             .then(response => response.json())
+             .then(response => {
+                alert("Hospitais atualizados com sucesso!")
+                window.location.reload()
+             })
+             .catch(error => console.log(error))
+
         }
+       
 
-        console.log(JSON.stringify(sendData))
-
-         fetch("http://localhost:5000/apelidos", {
-            method:"POST",
-            body:JSON.stringify(sendData),
-            headers: {
-                "Content-Type": "application/json", // Definir o Content-Type como JSON
-              }
-         })
-         .then(response => response.json())
-         .then(response => {
- 
-            alert("Hospitais atualizados com sucesso!")
-            window.location.reload()
-         })
-         .catch(error => console.log(error))
+        }
+        
     }
 
     return (
-        <div className={`${styles.button} ${styles.cursor}`  } onClick={enviarSelecionados} >
-            Atualizar selecionados
+        <div className={`${styles.button} ${styles.cursor}`  } onClick={() => enviarSelecionados()} >
+            Salvar selecionados
         </div>
        
     )

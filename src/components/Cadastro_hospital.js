@@ -2,10 +2,10 @@ import { useState, useRef } from 'react'
 import styles from './Cadastro_hospital.module.css'
 
 
-function Cadastro_hospital({setInp, setValueHospital, valueHospital, setCadastro}){
-    const  inputRef = useRef()
-   
- 
+function Cadastro_hospital(props){
+    
+    const [valueHospital,setValueHospital] = useState("")
+    
     const sendData = {
         hospital: valueHospital
     }
@@ -19,14 +19,8 @@ function Cadastro_hospital({setInp, setValueHospital, valueHospital, setCadastro
         })
         .then(response => response.json())
         .then(response  => {
-           
-            inputRef.current.value = ""
-            setValueHospital("")
-            if(response['response'] == 'Hospital já registrado!'){
-                alert(response['response'])
-            }else{
-                setCadastro(false)
-                alert(response['response'])}
+                alert("Hospital cadastrado com sucesso!")
+                props.setControle(false)
             })
             
         .catch(err => console.log(err))
@@ -36,7 +30,7 @@ function Cadastro_hospital({setInp, setValueHospital, valueHospital, setCadastro
         <>
 
             <div className={styles.container}>
-                <input ref={inputRef} onChange={e => setValueHospital(e.target.value)} className={styles.input} type="text" placeholder ="Digite o nome do novo hospital" ></input>
+                <input onChange={e => setValueHospital(e.target.value)} className={styles.input} type="text" placeholder ="Digite o nome do novo hospital" ></input>
                 <button onClick={cadastro_hospital} className={styles.button} >Cadastrar</button>
             </div>
         

@@ -1,24 +1,31 @@
 import Select from "./Select"
 import styles from './SearchBar.module.css';
-function SearchBar({ hospitais, setHospitais,setInput, pesquisar, selectedHospital, setSelectedHospital, valueHospital}){
-    
-
+import { useEffect, useRef } from "react";
+function SearchBar(props){
+    const campo_input = useRef();
+    const atualiza_input = ()=> {
+        console.log("entrou " , campo_input.current)
+        campo_input.current.value = props.selectedHospital;
+    }
+    useEffect(()=>{
+        atualiza_input()
+    },[props.selectedHospital])
+ 
     return(
         <>
-         <p className={styles.p}>Pesquisador de apelidos de hospitais</p>
-        <div className={styles.container} >
-           
-            <Select hospitais ={hospitais} setHospitais={setHospitais} selectedHospital = {selectedHospital}  setSelectedHospital ={setSelectedHospital} valueHospital={ valueHospital} />
+        
+        <div className={`${styles.container} ${props.customClass != undefined? 'displayBlock': '' }`} >
             <input
-            onChange={(e) => setInput(e.target.value)}
+            ref={campo_input}
+            onChange={(e) => props.setPesquisadorPalavraChave(e.target.value)}
             className={styles.input}
             type="text"
             name="text"
             id="buscador_header_input_hospital"
-            placeholder="Digite o hospital"
+            placeholder="Palavras chaves"
             ></input>
             <button 
-            onClick={pesquisar}
+            onClick={() => props.pesquisarPalavraChave()}
             className={styles.pesquisar}
             type="submit"
             id="buscador_header_btn_pesquisar"

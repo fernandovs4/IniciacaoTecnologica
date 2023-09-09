@@ -2,7 +2,11 @@
     display: flex;
     justify-content: space-between;
     max-width: 700px;
-    margin: 1em auto;
+    margin-left: 10px;
+    
+    margin-top: 10px;
+   
+
 
 }
 
@@ -21,7 +25,8 @@
     font-weight: 900;
     background-color: rgb(85, 230, 97);
     border: none;
-    padding: 0.1em 1em;
+    padding: 0.1em 0.5em;
+    margin: 0px 10px;
     border-radius: 3px;
     cursor: pointer;
 }
@@ -29,4 +34,8 @@
     background-color: rgb(140, 235, 148);
 
     font-weight: 900;
+}
+
+.input{
+    border-radius: 3px;
 }

@@ -74,3 +74,17 @@ li{
 .selecionado{
   background-color: rgb(57, 197, 75) !important;
 }
+
+.registrado{
+  background-color: rgb(82, 150, 91) !important;
+
+}
+
+.buscador_p{
+  display: flex;
+  justify-content: center;
+  color: rgb(90, 85, 85);
+  font-size: larger;
+  font-weight: 700;
+}
+

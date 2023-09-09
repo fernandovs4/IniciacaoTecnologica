@@ -1,14 +1,18 @@
 import Container from './Container'
 import styles from './ListRight.module.css'
-function ListRight({ hospitaisSelecionados, toggleHospitalSelection }) {
-  
+function ListRight(props) {
+    const handleClick = (hospital) => {
+        props.setHospitaisSelecionados(props.hospitaisSelecionados.filter(el => el != hospital))
+        props.setHospitaisNaoSelecionados([hospital, ...props.hospitaisEncontrados])
+    }
     return (
         <ul className={styles.ul} > 
-            {hospitaisSelecionados.map((hospital) => (
+            {props.hospitaisSelecionados.map((hospital, i) => (
                 <li
-                    key={hospital}
-                    className={`selecionado ${styles.li}`}
-                    onClick={() => toggleHospitalSelection(hospital)}
+                    key={i}
+                    onClick={() => handleClick(hospital)}
+                    className={`${props.hospitaisNoBancoDeDados.includes(hospital)? 'registrado': 'selecionado'} ${styles.li}`}
+                    // onClick={() => toggleHospitalSelection(hospital)}
                 >
                     {hospital}
                 </li>

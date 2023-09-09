@@ -47,7 +47,7 @@ function SelecaoHospitais({setHospitais, setValueHospital, valueHospital}) {
     }
 
     return (
-        <div className={styles.container}>
+        <div className={`${styles.container} selecao`}>
             <button className={styles.button} onClick={deletarSelecionados}>Deletar selecionados</button>
             {hospitaisDaSelecao.map(el => (
                 <div className={styles.input} key={el}>

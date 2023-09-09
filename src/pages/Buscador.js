@@ -6,71 +6,98 @@ import ListRight from '../components/ListRigth'
 import { contains } from 'jquery'
 import SearchBar from '../components/SearchBar'
 import SendSelected from '../components/SendSelected'
-import SelecaoHospitais from '../components/SelecaoHospitais'
+import Select from '../components/Select'
 const Buscador = () => {
-    const [input, setInput] = useState('');
+   
     const [hospitaisEncontrados, setHospitaisNaoSelecionados] = useState([])
     const [hospitais_registrados, setHospitaisRegistrados] = useState([])
     const [hospitaisSelecionados, setHospitaisSelecionados] = useState([])
- 
-    const pesquisar = (evt) => {
-        if (!(input === '')) {
-          fetch(`http://localhost:5000/hospitais?hospital=${input}`, {
-            method: 'GET',
-          })
-            .then((response) => response.json())
-            .then((data) => {
-                
-                setHospitaisRegistrados([...data['hospitais_registrados'].filter(el => !hospitaisSelecionados.includes(el)), ...hospitaisSelecionados]); // Corrected prop name here
-                setHospitaisNaoSelecionados(data['hospitais_encontrados']['hospitais']); // Corrected prop name here
-                setHospitaisSelecionados( [...hospitaisSelecionados, ...data['hospitais_registrados'].filter(el => !hospitaisSelecionados.includes(el))])
+    const [PesquisadorPalavraChave, setPesquisadorPalavraChave] = useState("")
+    const [selectedHospital, setSelectedHospital] =  useState("")
+    const [hospitaisNoBancoDeDados, setHospitaisNoBancoDeDados] = useState([])
+    const pesquisarPalavraChave =  (evt) => {
+            const fetchData = async () => {
+                try{
+                    const response = await fetch(`http://localhost:5000/hospitais?hospital=${PesquisadorPalavraChave}&hospital-selecionado=${selectedHospital}`, {
+                        method: 'GET',
+                    })
+                    const data = await response.json()
+                    
+                    setHospitaisRegistrados([...data['hospitais_registrados']]);
+                    setHospitaisSelecionados([...hospitaisSelecionados, ...data['hospitais_registrados'].filter(el => !hospitaisSelecionados.includes(el))]);
+                    setHospitaisNoBancoDeDados([...data['hospitais_registrados']])
+                    setHospitaisNaoSelecionados(
+                        [...data['hospitais_encontrados']['hospitais']].filter(
+                            el => !hospitaisSelecionados.includes(el) && !data['hospitais_registrados'].includes(el)
+                        )
+                    );
+                }catch(err){
+                    console.log(err)
+                }
 
-            });
-        }
+            }   
+            if (!(PesquisadorPalavraChave === '')) {
+                fetchData()
+            }
       };
-
-    const toggleHospitalSelection = (hospital) => {
-        if (hospitaisSelecionados.includes(hospital)) {
-            setHospitaisSelecionados(hospitaisSelecionados.filter((h) => h !== hospital));
-        } else {
-            setHospitaisSelecionados([hospital, ...hospitaisSelecionados]);
-        }
-    };
- 
-    
-    // useEffect(() => {
-    //     // Move os hospitais selecionados para o final da lista
-    //     const updatedEncontrados = hospitaisEncontrados.filter(h => !hospitaisSelecionados.includes(h));
-    //     setHospitaisNaoSelecionados([...updatedEncontrados, ...hospitaisSelecionados]);
-    // }, [hospitaisSelecionados]);
-
-    const [selectedHospital, setSelectedHospital] = useState("")
-    const [valueHospital, setValueHospital] = useState("")
-    console.log(valueHospital)
-    const [hospitais, setHospitais] = useState([]);
-    
+      const [controle, setControle] = useState(true);
+      console.log(hospitaisSelecionados)
     return (
         <>
-            <Navbar  setHospitais ={ setHospitais} setInp= {setSelectedHospital} setValueHospital = {setValueHospital} valueHospital={valueHospital} ></Navbar>
-            <SearchBar hospitais ={hospitais} setHospitais={setHospitais}  setInput={setInput} pesquisar={pesquisar}  selectedHospital={selectedHospital} setSelectedHospital = {setSelectedHospital} valueHospital = {valueHospital}></SearchBar>
+            {/* <Navbar></Navbar> */}
+            <Navbar />
+
+           
+            <p className='buscador_p' >Para começar, selecione o hospital de referência da busca</p>
+            <Select
+                setControle ={setControle}
+                hospitaisEncontrados ={hospitaisEncontrados} 
+                setHospitaisNaoSelecionados ={setHospitaisNaoSelecionados}
+                pesquisarPalavraChave = {pesquisarPalavraChave} 
+                hospitaisSelecionados = {hospitaisSelecionados}
+                setHospitaisRegistrados ={setHospitaisRegistrados}
+                setPesquisadorPalavraChave={setPesquisadorPalavraChave} 
+                setHospitaisSelecionados = {setHospitaisSelecionados}
+                setSelectedHospital = {setSelectedHospital}
+                selectedHospital = {selectedHospital}
+                setHospitaisNoBancoDeDados = {setHospitaisNoBancoDeDados}>
+            </Select>
+            
            
             {
                 (hospitaisEncontrados.length > 0 || hospitais_registrados.length > 0 || hospitaisSelecionados.length > 0) ? (
                     <>
-                
-                    <Container >
-                         <ListLeft
-                            setHospitaisNaoSelecionados={setHospitaisNaoSelecionados}
-                            setHospitaisSelecionados={setHospitaisNaoSelecionados}
-                            hospitaisEncontrados={hospitaisEncontrados}
-                            hospitaisSelecionados={hospitaisSelecionados}
-                            toggleHospitalSelection={toggleHospitalSelection}
-                        />
-                        <ListRight
-                        
+                   
+                    <Container customClass = "sendSelected">
+                    <SearchBar hospitaisEncontrados ={hospitaisEncontrados} 
+                        setHospitaisNaoSelecionados ={setHospitaisNaoSelecionados}
+                        pesquisarPalavraChave = {pesquisarPalavraChave} 
+                        hospitaisSelecionados = {hospitaisSelecionados}
+                        setHospitaisRegistrados ={setHospitaisRegistrados}
+                        setPesquisadorPalavraChave={setPesquisadorPalavraChave} 
+                        setHospitaisSelecionados = {setHospitaisSelecionados}
+                        setSelectedHospital = {setSelectedHospital}
+                        selectedHospital = {selectedHospital}
+                        setHospitaisNoBancoDeDados = {setHospitaisNoBancoDeDados}
+                    ></SearchBar>
 
+                    <SendSelected  hospitaisEncontrados ={hospitaisEncontrados} hospitaisSelecionados={hospitaisSelecionados} selectedHospital ={selectedHospital} ></SendSelected>
+
+                    </Container>
+                    
+                    <Container >
+                        <ListLeft  
+                        setHospitaisNaoSelecionados ={setHospitaisNaoSelecionados}
+                        setHospitaisSelecionados = {setHospitaisSelecionados}
+                        hospitaisEncontrados ={hospitaisEncontrados}
+                        hospitaisSelecionados = {hospitaisSelecionados} ></ListLeft>
+                         
+                        <ListRight
+                            setHospitaisNaoSelecionados = {setHospitaisNaoSelecionados}
+                            hospitaisEncontrados = {hospitaisEncontrados}
+                            setHospitaisSelecionados = {setHospitaisSelecionados}
                             hospitaisSelecionados={hospitaisSelecionados}
-                            toggleHospitalSelection={toggleHospitalSelection}
+                            hospitaisNoBancoDeDados = {hospitaisNoBancoDeDados}
                         />
                     </Container>
                     </>

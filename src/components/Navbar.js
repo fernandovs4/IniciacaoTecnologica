@@ -5,7 +5,7 @@ import { useState } from 'react';
 import Cadastro_hospital from './Cadastro_hospital';
 import SelecaoHospitais from './SelecaoHospitais';
 
-const Navbar = ({setHospitais, setInp, setValueHospital, valueHospital}) => {
+const Navbar = ({setControle, setHospitais, setValueHospital, valueHospital}) => {
   let [cadastro, setCadastro] = useState(false)
   let [selecaoHospitais, setSelecaoHospitais] = useState(false)
   const cadastrar_novo_hospital  = ()=> {
@@ -17,7 +17,11 @@ const Navbar = ({setHospitais, setInp, setValueHospital, valueHospital}) => {
     }
 
   return (
-    !cadastro ? (<div className={styles.buscadaor_header_container}>
+    !cadastro ? (
+      <div className={styles.navbar} >
+
+    
+    <div className={styles.buscadaor_header_container}>
       <div className={styles.buscadaor_header_search}>
         <Link className={styles.link} to="/home">
           Home
@@ -31,7 +35,9 @@ const Navbar = ({setHospitais, setInp, setValueHospital, valueHospital}) => {
         
       </div>
     </div>
+    </div>
   ): (
+    <div className={styles.navbar} >
     <div className={styles.buscadaor_header_container}>
       <div className={styles.buscadaor_header_search}>
         <Link className={styles.link} to="/home">
@@ -42,9 +48,10 @@ const Navbar = ({setHospitais, setInp, setValueHospital, valueHospital}) => {
         {selecaoHospitais && (
           <div> <SelecaoHospitais setHospitais= {setHospitais} setValueHospital = {setValueHospital}  valueHospital = {valueHospital}></SelecaoHospitais></div>
         )}
-        <Cadastro_hospital setInp={setInp} setValueHospital = {setValueHospital} valueHospital={valueHospital} setCadastro={setCadastro}></Cadastro_hospital>
+        <Cadastro_hospital  setControle = {setControle}></Cadastro_hospital>
         
       </div>
+    </div>
     </div>
 
   )
