@@ -88,3 +88,76 @@ li{
   font-weight: 700;
 }
 
+.btn_home{
+  display: flex;
+  justify-content: center;
+  background-color:rgb(82, 150, 91) ;
+  color: white;
+  border-radius: 6px;
+  padding: 5px;
+  margin-left: 10px;
+  cursor: pointer;
+  font-size: larger;
+  font-weight: 700;
+
+}
+abbr{
+  cursor: pointer;
+  text-decoration: none;
+}
+.div_btn_home{
+  display: flex;
+  justify-content: end;
+}
+.div_h1_home{
+  display: flex;
+  justify-content: center;
+  color: rgb(90, 85, 85);
+}
+
+.exportar_excel{
+  display: flex;
+  justify-content: center;
+  background-color:rgb(82, 150, 91) ;
+  color: white;
+  border-radius: 6px;
+  padding: 5px;
+  margin-left: 10px;
+  cursor: pointer;
+  font-size: larger;
+  font-weight: 700;
+
+}
+
+.div_exportar_excel{
+  display: flex;
+  justify-content: end;
+  margin-bottom: 10px;
+}
+
+.estudosH1{
+  display: flex;
+  justify-content: center;
+  color: rgb(145, 134, 134);
+  margin: 0%;
+  padding: 0%;
+}
+.filtros{
+  display: flex;
+
+  color: rgb(145, 134, 134);
+  font-size: larger;
+  font-weight: 700;
+  margin-left: 1px;
+}
+
+#dataInicial{
+  width: 200px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+#dataFinal{
+  width: 200px;
+  margin-left: 10px;
+  margin-right: 10px;
+}

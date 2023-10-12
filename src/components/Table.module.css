@@ -1,0 +1,34 @@
+/* Tabela.module.css */
+
+/* Estilos para a tabela */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  /* Estilos para o cabeçalho da tabela */
+  th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    text-align: left;
+    padding: 8px;
+    border: 1px solid #dddddd;
+  }
+  
+  /* Estilos para as células da tabela */
+  td {
+    padding: 8px;
+    border: 1px solid #dddddd;
+  }
+  
+  /* Estilos para linhas alternadas (opcional) */
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  /* Estilos para realce de hover (opcional) */
+  tr:hover {
+    background-color: #ddd;
+  }
+  
