@@ -14,7 +14,6 @@ function Filtros() {
     const [opcaoClinicasDetalhes, setOpcaoClinicasDetalhes] = useState('');
     const [periodoEstudo, setPeriodoEstudo] = useState('');
     const [faseEstudos, setFaseEstudos] = useState('');
-    const [faseEstudosCarregadas, setFaseEstudosCarregadas] = useState(false);
 
     useEffect(() => {
         fetch('http://localhost:5000/todosEstudos')
@@ -148,6 +147,10 @@ function Filtros() {
                         <input name='fase3' type='checkbox' ></input>
                         <label name='fase4' >Fase 4: </label>
                         <input name='fase4' type='checkbox' ></input>
+                        <label name='nao_especificada' >Não especificada: </label>
+                        <input name='nao_especificada' type='checkbox' ></input>
+                        <label name='duas_ou_mais_fases' >Duas ou mais fases: </label>
+                        <input name='duas_ou_mais_fases' type='checkbox' ></input>
                     </div>
                 )}
             </div>
@@ -163,7 +166,7 @@ function Filtros() {
                 <div className={styles.container_esquerdo}>
                     <select className={styles.select_esquerdo}>
                         <option value="todos">Farmácias</option>
-                        <option value="farmacias">opcao2</option>
+                        <option value="farmacias">Condições</option>
                         <option value="farmacias">opcao3</option>
                         <option value="farmacias">opcao4</option>
                     </select>
