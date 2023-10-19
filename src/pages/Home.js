@@ -5,8 +5,8 @@ import Loading from "../components/Loading";
 import { useEffect } from 'react';
 import { Link } from "react-router-dom";
 import styles from '../components/Navbar.module.css';
+import FiltroTabela from "../components/FiltroTabela";
 
-import CustomizedMenus from "../components/CustomizedMenus";
 
 
 
@@ -87,9 +87,10 @@ function Home(){
             tabela.sort(compararLinhas);
             return tabela;
     }
-
+    const [url, setUrl] = useState('http://localhost:5000/construirTabela?&stdage=all&fase=todas&gender=todos')
+    console.log(url, "aaaaaaaaaaaaaaaaaaa")
     useEffect(() => {
-        fetch('http://localhost:5000/estudos?cache=true', {
+        fetch(url, {
             method: 'GET',
         })
         .then(response => response.json())
@@ -99,52 +100,51 @@ function Home(){
             setAtualizarTabela(false)
     })
 
-    }, [])
+    }, [url])
 
-    const [dataInicial, setDataInicial] = useState('');
-    const [dataFinal, setDataFinal] = useState('');
+    // const [dataInicial, setDataInicial] = useState('');
+    // const [dataFinal, setDataFinal] = useState('');
   
-    const handleDataInicialChange = (event) => {
-      setDataInicial(event.target.value);
-    };
+    // const handleDataInicialChange = (event) => {
+    //   setDataInicial(event.target.value);
+    // };
   
-    const handleDataFinalChange = (event) => {
-      setDataFinal(event.target.value);
-    };
+    // const handleDataFinalChange = (event) => {
+    //   setDataFinal(event.target.value);
+    // };
 
-    const dadosHospitais = ()=> {
-        console.log(dataFinal)
-        console.log(dataInicial.substring(8,10) + "-" +dataInicial.substring(5,7) + "-" + dataInicial.substring(0,4))
-        if(dataFinal && dataInicial){
-            setAtualizarTabela(true)
+    // const dadosHospitais = ()=> {
+      
+    //     if(dataFinal && dataInicial){
+    //         setAtualizarTabela(true)
             
-            fetch(`http://localhost:5000/estudos?datainicial=${dataInicial.substring(8,10) + "-" +dataInicial.substring(5,7) + "-" + dataInicial.substring(0,4) }&datafinal=${dataFinal.substring(8,10) + "-" +dataFinal.substring(5,7) + "-" + dataFinal.substring(0,4)}`, {
-                method: 'GET',
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data)
-                const tabela = formataDadosPraTabela(data);
-                setDadosExemplo(tabela)
-                setTodosAnos(false)
-                setAtualizarTabela(false)
-            })
-        }else{
-            setAtualizarTabela(true)
-            fetch('http://localhost:5000/estudos', {
-                method: 'GET',
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data)
-                const tabela = formataDadosPraTabela(data);
-                setDadosExemplo(tabela)
-                setAtualizarTabela(false)
-            })
+    //         fetch(`http://localhost:5000/estudos?datainicial=${dataInicial.substring(8,10) + "-" +dataInicial.substring(5,7) + "-" + dataInicial.substring(0,4) }&datafinal=${dataFinal.substring(8,10) + "-" +dataFinal.substring(5,7) + "-" + dataFinal.substring(0,4)}`, {
+    //             method: 'GET',
+    //         })
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             console.log(data)
+    //             const tabela = formataDadosPraTabela(data);
+    //             setDadosExemplo(tabela)
+    //             setTodosAnos(false)
+    //             setAtualizarTabela(false)
+    //         })
+    //     }else{
+    //         setAtualizarTabela(true)
+    //         fetch('http://localhost:5000/estudos', {
+    //             method: 'GET',
+    //         })
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             console.log(data)
+    //             const tabela = formataDadosPraTabela(data);
+    //             setDadosExemplo(tabela)
+    //             setAtualizarTabela(false)
+    //         })
 
-        }
+    //     }
        
-    }
+    // }
     
     return (
         <div>
@@ -154,19 +154,17 @@ function Home(){
 
                 </div>
                 
-         
-            <div className="filtros">
-                <Link to="tabela/filtros" ><button>Filtros</button></Link>
-            </div>
-
+                {<FiltroTabela setUrl ={setUrl} ></FiltroTabela>}
            <div className="div_btn_home">
-            <button className="btn_home" onClick = {dadosHospitais}> <abbr title="Ao autualizar a tabela, novos estudos são buscados" >Atualizar dados na tabela</abbr> </button>
+            {/* <button className="btn_home" onClick = {dadosHospitais}> <abbr title="Ao autualizar a tabela, novos estudos são buscados" >Atualizar dados na tabela</abbr> </button> */}
 
            </div>
 
+      
+{/* 
            {todosAnos ? ( <div className="div_h1_home" >
                 <h1 className="estudosH1" >Estudos de todos os anos</h1>
-           </div>): (<h1 className="estudosH1">Estudo de {dataInicial} até {dataFinal}</h1>)}
+           </div>): (<h1 className="estudosH1">Estudo de {dataInicial} até {dataFinal}</h1>)} */}
           
             
             {atualizarTabela ? (<Loading></Loading>):(<Tabela dados = {dadosExemplo}></Tabela>) }
