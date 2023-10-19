@@ -222,6 +222,7 @@ function Filtros() {
                             </select>
                         </div>
                     )}
+
                     {renderOpcoesClinicas()}
                    
                 </div>
