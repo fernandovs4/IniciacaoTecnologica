@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import styles from './Filtro.module.css';
 
 const FiltroTabela = (props) => {
-  const [fasesSelecionadas, setFasesSelecionadas] = useState(['todos']);
-  const [stdAgesSelecionadas, setStdAgesSelecionadas] = useState(['todos']);
-  const [gendersSelecionados, setGendersSelecionados] = useState(['todos']);
-  const [statusSelecionados, setStatusSelecionados] = useState(['todos']);
+  const [fasesSelecionadas, setFasesSelecionadas] = useState(['todas']);
+  const [stdAgesSelecionadas, setStdAgesSelecionadas] = useState(['todas']);
+  const [gendersSelecionados, setGendersSelecionados] = useState(['todas']);
+  const [statusSelecionados, setStatusSelecionados] = useState(['todas']);
   const [dataInicial, setDataInicial] = useState('2000-01-01');
   const [dataFinal, setDataFinal] = useState('2023-01-01');
   const [idade_min, setIdade_min] = useState('');
@@ -74,13 +74,13 @@ const FiltroTabela = (props) => {
   const handleFaseChange = (event) => {
     const { value } = event.target;
 
-    if (value === 'todos') {
-      // Se "Todos" foi selecionado, desmarque todas as outras fases
-      setFasesSelecionadas(['todos']);
+    if (value === 'todas') {
+      // Se "todas" foi selecionado, desmarque todas as outras fases
+      setFasesSelecionadas(['todas']);
     } else {
-      // Caso contrário, desmarque "Todos" se estiver selecionado
-      const updatedFases = fasesSelecionadas.includes('todos')
-        ? fasesSelecionadas.filter((fase) => fase !== 'todos')
+      // Caso contrário, desmarque "todas" se estiver selecionado
+      const updatedFases = fasesSelecionadas.includes('todas')
+        ? fasesSelecionadas.filter((fase) => fase !== 'todas')
         : fasesSelecionadas;
 
       // Marque/desmarque a fase selecionada
@@ -95,13 +95,13 @@ const FiltroTabela = (props) => {
   const handleStdAgeChange = (event) => {
     const { value } = event.target;
 
-    if (value === 'todos') {
-      // Se "Todos" foi selecionado, desmarque todas as outras idades
-      setStdAgesSelecionadas(['todos']);
+    if (value === 'todas') {
+      // Se "todas" foi selecionado, desmarque todas as outras idades
+      setStdAgesSelecionadas(['todas']);
     } else {
-      // Caso contrário, desmarque "Todos" se estiver selecionado
-      const updatedAges = stdAgesSelecionadas.includes('todos')
-        ? stdAgesSelecionadas.filter((age) => age !== 'todos')
+      // Caso contrário, desmarque "todas" se estiver selecionado
+      const updatedAges = stdAgesSelecionadas.includes('todas')
+        ? stdAgesSelecionadas.filter((age) => age !== 'todas')
         : stdAgesSelecionadas;
 
       // Marque/desmarque a idade selecionada
@@ -116,13 +116,13 @@ const FiltroTabela = (props) => {
   const handleGenderChange = (event) => {
     const { value } = event.target;
 
-    if (value === 'todos') {
-      // Se "Todos" foi selecionado, desmarque todos os outros gêneros
-      setGendersSelecionados(['todos']);
+    if (value === 'todas') {
+      // Se "todas" foi selecionado, desmarque todas os outros gêneros
+      setGendersSelecionados(['todas']);
     } else {
-      // Caso contrário, desmarque "Todos" se estiver selecionado
-      const updatedGenders = gendersSelecionados.includes('todos')
-        ? gendersSelecionados.filter((gender) => gender !== 'todos')
+      // Caso contrário, desmarque "todas" se estiver selecionado
+      const updatedGenders = gendersSelecionados.includes('todas')
+        ? gendersSelecionados.filter((gender) => gender !== 'todas')
         : gendersSelecionados;
 
       // Marque/desmarque o gênero selecionado
@@ -137,13 +137,13 @@ const FiltroTabela = (props) => {
   const handleStatusChange = (event) => {
     const { value } = event.target;
 
-    if (value === 'todos') {
-      // Se "Todos" foi selecionado, desmarque todos os outros status
-      setStatusSelecionados(['todos']);
+    if (value === 'todas') {
+      // Se "todas" foi selecionado, desmarque todas os outros status
+      setStatusSelecionados(['todas']);
     } else {
-      // Caso contrário, desmarque "Todos" se estiver selecionado
-      const updatedStatus = statusSelecionados.includes('todos')
-        ? statusSelecionados.filter((status) => status !== 'todos')
+      // Caso contrário, desmarque "todas" se estiver selecionado
+      const updatedStatus = statusSelecionados.includes('todas')
+        ? statusSelecionados.filter((status) => status !== 'todas')
         : statusSelecionados;
 
       // Marque/desmarque o status selecionado
@@ -210,11 +210,11 @@ const FiltroTabela = (props) => {
           <div className={styles.checkboxGroup}>
             <input
               type="checkbox"
-              value="todos"
-              checked={fasesSelecionadas.includes('todos')}
+              value="todas"
+              checked={fasesSelecionadas.includes('todas')}
               onChange={handleFaseChange}
             />
-            <label>Todos</label>
+            <label>todas</label>
             <input
               type="checkbox"
               value="1"
@@ -259,11 +259,11 @@ const FiltroTabela = (props) => {
           <div className={styles.checkboxGroup}>
             <input
               type="checkbox"
-              value="todos"
-              checked={stdAgesSelecionadas.includes('todos')}
+              value="todas"
+              checked={stdAgesSelecionadas.includes('todas')}
               onChange={handleStdAgeChange}
             />
-            <label>Todos</label>
+            <label>todas</label>
             <input
               type="checkbox"
               value="Child"
@@ -293,11 +293,11 @@ const FiltroTabela = (props) => {
           <div className={styles.checkboxGroup}>
             <input
               type="checkbox"
-              value="todos"
-              checked={gendersSelecionados.includes('todos')}
+              value="todas"
+              checked={gendersSelecionados.includes('todas')}
               onChange={handleGenderChange}
             />
-            <label>Todos</label>
+            <label>todas</label>
             <input
               type="checkbox"
               value="masculino"
@@ -320,11 +320,11 @@ const FiltroTabela = (props) => {
           <div className={styles.checkboxGroup}>
             <input
               type="checkbox"
-              value="todos"
-              checked={statusSelecionados.includes('todos')}
+              value="todas"
+              checked={statusSelecionados.includes('todas')}
               onChange={handleStatusChange}
             />
-            <label>Todos</label>
+            <label>todas</label>
             <input
               type="checkbox"
               value="completed"

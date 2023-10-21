@@ -7,6 +7,8 @@ import * as XLSX from 'xlsx';
 
 
 const Tabela = ({ dados }) => {
+
+  console.log("aaaaaaaaaaaaaaaaaaaaaa",dados )
   const exportToExcel = () => {
     if (!dados || dados.length === 0) {
       return;

@@ -3,12 +3,10 @@ import Navbar from '../components/Navbar'
 import ListLeft from '../components/ListLeft'
 import Container from '../components/Container'
 import ListRight from '../components/ListRigth'
-import { contains } from 'jquery'
 import SearchBar from '../components/SearchBar'
 import SendSelected from '../components/SendSelected'
 import Select from '../components/Select'
 const Buscador = () => {
-   
     const [hospitaisEncontrados, setHospitaisNaoSelecionados] = useState([])
     const [hospitais_registrados, setHospitaisRegistrados] = useState([])
     const [hospitaisSelecionados, setHospitaisSelecionados] = useState([])
@@ -21,8 +19,7 @@ const Buscador = () => {
                     const response = await fetch(`http://localhost:5000/hospitais?hospital=${PesquisadorPalavraChave}&hospital-selecionado=${selectedHospital}`, {
                         method: 'GET',
                     })
-                    const data = await response.json()
-                    
+                    const data = await response.json()                    
                     setHospitaisRegistrados([...data['hospitais_registrados']]);
                     setHospitaisSelecionados([...hospitaisSelecionados, ...data['hospitais_registrados'].filter(el => !hospitaisSelecionados.includes(el))]);
                     setHospitaisNoBancoDeDados([...data['hospitais_registrados']])
@@ -34,7 +31,6 @@ const Buscador = () => {
                 }catch(err){
                     console.log(err)
                 }
-
             }   
             if (!(PesquisadorPalavraChave === '')) {
                 fetchData()
@@ -45,9 +41,7 @@ const Buscador = () => {
     return (
         <>
             {/* <Navbar></Navbar> */}
-            <Navbar />
-
-           
+            <Navbar />           
             <p className='buscador_p' >Para começar, selecione o hospital de referência da busca</p>
             <Select
                 setControle ={setControle}
@@ -62,12 +56,9 @@ const Buscador = () => {
                 selectedHospital = {selectedHospital}
                 setHospitaisNoBancoDeDados = {setHospitaisNoBancoDeDados}>
             </Select>
-            
-           
             {
                 (hospitaisEncontrados.length > 0 || hospitais_registrados.length > 0 || hospitaisSelecionados.length > 0) ? (
                     <>
-                   
                     <Container customClass = "sendSelected">
                     <SearchBar hospitaisEncontrados ={hospitaisEncontrados} 
                         setHospitaisNaoSelecionados ={setHospitaisNaoSelecionados}
@@ -90,8 +81,7 @@ const Buscador = () => {
                         setHospitaisNaoSelecionados ={setHospitaisNaoSelecionados}
                         setHospitaisSelecionados = {setHospitaisSelecionados}
                         hospitaisEncontrados ={hospitaisEncontrados}
-                        hospitaisSelecionados = {hospitaisSelecionados} ></ListLeft>
-                         
+                        hospitaisSelecionados = {hospitaisSelecionados} ></ListLeft>  
                         <ListRight
                             setHospitaisNaoSelecionados = {setHospitaisNaoSelecionados}
                             hospitaisEncontrados = {hospitaisEncontrados}
@@ -101,12 +91,9 @@ const Buscador = () => {
                         />
                     </Container>
                     </>
-                    
                 ) : ("")
             }
-
         </>
     )
 }
-
 export default Buscador

@@ -6,18 +6,13 @@ import { useEffect } from 'react';
 import { Link } from "react-router-dom";
 import styles from '../components/Navbar.module.css';
 import FiltroTabela from "../components/FiltroTabela";
-
-
-
+import TabelaCondicao from "../components/TabelaCondicao";
 
 function Home(){
-    const [dados, setDados] = useState([]) // dados = [{}
     const [dadosExemplo, setDadosExemplo] = useState([]) // dados = [{}
-    const [atualizarTabela, setAtualizarTabela] = useState(false) // dados = [{}
-    const [todosAnos, setTodosAnos] = useState(true) // dados = [{}
+    const [atualizarTabela, setAtualizarTabela] = useState(true) // dados = [{}
 
     const formataDadosPraTabela = (dados) => {
-        
             // Crie uma lista de todas as farmacêuticas e hospitais
             const farmaceuticas = Object.keys(dados);
             const hospitais = new Set();
@@ -85,16 +80,16 @@ function Home(){
 
             // Ordene as linhas com base nos totais
             tabela.sort(compararLinhas);
+           
             return tabela;
     }
-    const [url, setUrl] = useState('http://localhost:5000/construirTabela?&stdage=all&fase=todas&gender=todos')
-    console.log(url, "aaaaaaaaaaaaaaaaaaa")
+    const [url, setUrl] = useState('http://localhost:5000/construirTabela?&stdage=todas&fase=todas&gender=todas')
     useEffect(() => {
         fetch(url, {
             method: 'GET',
         })
         .then(response => response.json())
-        .then(dados=> {               
+        .then(dados=> {            
             const tabela = formataDadosPraTabela(dados);
             setDadosExemplo(tabela)
             setAtualizarTabela(false)
@@ -149,25 +144,18 @@ function Home(){
     return (
         <div>
                 <div className={styles.buscadaor_header_container}>
-                <Link className={styles.link} to="/buscador" > Buscador
-                </Link>
-
+                <Link className={styles.link} to="/buscador" > Buscador </Link>
                 </div>
                 
                 {<FiltroTabela setUrl ={setUrl} ></FiltroTabela>}
            <div className="div_btn_home">
             {/* <button className="btn_home" onClick = {dadosHospitais}> <abbr title="Ao autualizar a tabela, novos estudos são buscados" >Atualizar dados na tabela</abbr> </button> */}
-
            </div>
-
-      
 {/* 
            {todosAnos ? ( <div className="div_h1_home" >
                 <h1 className="estudosH1" >Estudos de todos os anos</h1>
            </div>): (<h1 className="estudosH1">Estudo de {dataInicial} até {dataFinal}</h1>)} */}
-          
-            
-            {atualizarTabela ? (<Loading></Loading>):(<Tabela dados = {dadosExemplo}></Tabela>) }
+            {atualizarTabela ? (<Loading></Loading>):(<TabelaCondicao dados = {dadosExemplo}></TabelaCondicao>) }
             
         </div>
     )
