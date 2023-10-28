@@ -7,91 +7,95 @@ import { Link } from "react-router-dom";
 import styles from '../components/Navbar.module.css';
 import FiltroTabela from "../components/FiltroTabela";
 import TabelaCondicao from "../components/TabelaCondicao";
+import TabelaDinamica from "../components/TabelaHospitalDoenca";
+import TabelaHospitalDoenca from "../components/TabelaHospitalDoenca";
 
 function Home(){
-    const [dadosExemplo, setDadosExemplo] = useState([]) // dados = [{}
+    const [dadosExemplo, setDadosExemplo] = useState({}) // dados = [{}
     const [atualizarTabela, setAtualizarTabela] = useState(true) // dados = [{}
 
-    const formataDadosPraTabela = (dados) => {
-            // Crie uma lista de todas as farmacêuticas e hospitais
-            const farmaceuticas = Object.keys(dados);
-            const hospitais = new Set();
+    // const formataDadosPraTabela = (dados) => {
+    //         // Crie uma lista de todas as farmacêuticas e hospitais
+    //         const farmaceuticas = Object.keys(dados);
+    //         const hospitais = new Set();
 
-            // Encontre todos os hospitais
-            farmaceuticas.forEach(farmaceutica => {
-            const hospitaisFarmaceutica = Object.keys(dados[farmaceutica]);
-            hospitaisFarmaceutica.forEach(hospital => {
-                hospitais.add(hospital);
-            });
-            });
+    //         // Encontre todos os hospitais
+    //         farmaceuticas.forEach(farmaceutica => {
+    //         const hospitaisFarmaceutica = Object.keys(dados[farmaceutica]);
+    //         hospitaisFarmaceutica.forEach(hospital => {
+    //             hospitais.add(hospital);
+    //         });
+    //         });
 
-            // Converta o conjunto de hospitais de volta para uma lista
-            const hospitaisList = Array.from(hospitais);
+    //         // Converta o conjunto de hospitais de volta para uma lista
+    //         const hospitaisList = Array.from(hospitais);
 
-            // Crie a estrutura de dados da tabela
-            const tabela = [];
+    //         // Crie a estrutura de dados da tabela
+    //         const tabela = [];
 
-            // Adicione o cabeçalho da tabela (nomes dos hospitais) incluindo "Total"
-            const cabecalho = ['Farmacêutica', ...hospitaisList, 'Total'];
-            tabela.push(cabecalho);
+    //         // Adicione o cabeçalho da tabela (nomes dos hospitais) incluindo "Total"
+    //         const cabecalho = ['Farmacêutica', ...hospitaisList, 'Total'];
+    //         tabela.push(cabecalho);
 
-            // Inicialize um objeto para rastrear os totais de cada hospital
-            const totaisPorHospital = {};
+    //         // Inicialize um objeto para rastrear os totais de cada hospital
+    //         const totaisPorHospital = {};
 
-            // Adicione as linhas da tabela com quantidades e calcule os totais
-            farmaceuticas.forEach(farmaceutica => {
-            const linha = [farmaceutica];
-            let totalFarmaceutica = 0;
+    //         // Adicione as linhas da tabela com quantidades e calcule os totais
+    //         farmaceuticas.forEach(farmaceutica => {
+    //         const linha = [farmaceutica];
+    //         let totalFarmaceutica = 0;
 
-            hospitaisList.forEach(hospital => {
-                const quantidade = dados[farmaceutica][hospital] || 0;
-                linha.push(quantidade);
+    //         hospitaisList.forEach(hospital => {
+    //             const quantidade = dados[farmaceutica][hospital] || 0;
+    //             linha.push(quantidade);
 
-                // Atualize o total para este hospital
-                totaisPorHospital[hospital] = (totaisPorHospital[hospital] || 0) + quantidade;
-                totalFarmaceutica += quantidade;
-            });
+    //             // Atualize o total para este hospital
+    //             totaisPorHospital[hospital] = (totaisPorHospital[hospital] || 0) + quantidade;
+    //             totalFarmaceutica += quantidade;
+    //         });
 
-            // Adicione o total para esta farmacêutica à linha
-            linha.push(totalFarmaceutica);
-            tabela.push(linha);
-            });
+    //         // Adicione o total para esta farmacêutica à linha
+    //         linha.push(totalFarmaceutica);
+    //         tabela.push(linha);
+    //         });
 
-            // Adicione uma linha final com os totais de cada hospital
-            const linhaTotal = ['Total'];
-            let totalGeral = 0;
+    //         // Adicione uma linha final com os totais de cada hospital
+    //         const linhaTotal = ['Total'];
+    //         let totalGeral = 0;
 
-            hospitaisList.forEach(hospital => {
-            const totalHospital = totaisPorHospital[hospital] || 0;
-            linhaTotal.push(totalHospital);
-            totalGeral += totalHospital;
-            });
+    //         hospitaisList.forEach(hospital => {
+    //         const totalHospital = totaisPorHospital[hospital] || 0;
+    //         linhaTotal.push(totalHospital);
+    //         totalGeral += totalHospital;
+    //         });
 
-            // Adicione o total geral à linha final
-            linhaTotal.push(totalGeral);
-            tabela.push(linhaTotal);
+    //         // Adicione o total geral à linha final
+    //         linhaTotal.push(totalGeral);
+    //         tabela.push(linhaTotal);
 
-            // Função de comparação para ordenar com base no total (último elemento de cada linha)
-            function compararLinhas(linhaA, linhaB) {
-            const totalA = linhaA[linhaA.length - 1];
-            const totalB = linhaB[linhaB.length - 1];
-            return totalB - totalA; // Classifique em ordem decrescente
-            }
+    //         // Função de comparação para ordenar com base no total (último elemento de cada linha)
+    //         function compararLinhas(linhaA, linhaB) {
+    //         const totalA = linhaA[linhaA.length - 1];
+    //         const totalB = linhaB[linhaB.length - 1];
+    //         return totalB - totalA; // Classifique em ordem decrescente
+    //         }
 
-            // Ordene as linhas com base nos totais
-            tabela.sort(compararLinhas);
+    //         // Ordene as linhas com base nos totais
+    //         tabela.sort(compararLinhas);
            
-            return tabela;
-    }
-    const [url, setUrl] = useState('http://localhost:5000/construirTabela?&stdage=todas&fase=todas&gender=todas')
+    //         return tabela;
+    // }
+    const [url, setUrl] = useState('http://localhost:5000/construirTabela?&stdage=todas&fase=todas&gender=todas&tipo=farma_clinica')
     useEffect(() => {
         fetch(url, {
             method: 'GET',
         })
         .then(response => response.json())
         .then(dados=> {            
-            const tabela = formataDadosPraTabela(dados);
-            setDadosExemplo(tabela)
+           
+            setDadosExemplo(dados)
+
+        
             setAtualizarTabela(false)
     })
 
@@ -140,12 +144,14 @@ function Home(){
     //     }
        
     // }
-    
+
+    console.log(url)
     return (
         <div>
                 <div className={styles.buscadaor_header_container}>
                 <Link className={styles.link} to="/buscador" > Buscador </Link>
                 </div>
+                   
                 
                 {<FiltroTabela setUrl ={setUrl} ></FiltroTabela>}
            <div className="div_btn_home">
@@ -155,7 +161,7 @@ function Home(){
            {todosAnos ? ( <div className="div_h1_home" >
                 <h1 className="estudosH1" >Estudos de todos os anos</h1>
            </div>): (<h1 className="estudosH1">Estudo de {dataInicial} até {dataFinal}</h1>)} */}
-            {atualizarTabela ? (<Loading></Loading>):(<TabelaCondicao dados = {dadosExemplo}></TabelaCondicao>) }
+            {Object.keys(dadosExemplo).length == 0 ? (<Loading></Loading>):(<TabelaHospitalDoenca dados = {dadosExemplo}></TabelaHospitalDoenca>) }
             
         </div>
     )

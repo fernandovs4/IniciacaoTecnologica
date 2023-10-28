@@ -10,12 +10,18 @@ const FiltroTabela = (props) => {
   const [dataFinal, setDataFinal] = useState('2023-01-01');
   const [idade_min, setIdade_min] = useState('');
   const [idade_max, setIdade_max] = useState('');
+  const [inversed, setInversed] = useState(false);
+  const [simetric, setSimetric] = useState(true);
+  const [sort_externo, setSort_externo] = useState(true);
+  const [sort_interno, setSort_interno] = useState(true);
 
   useEffect(() => {
     let fases = '';
     let stdage = '';
     let gender = '';
     let status = '';
+  
+
     for (let i =0; i < fasesSelecionadas.length; i++){
       if (i < fasesSelecionadas.length - 1){
         fases += fasesSelecionadas[i] + ",";
@@ -56,19 +62,13 @@ const FiltroTabela = (props) => {
       data_final = dataFinal.substring(8,10) + "-" + dataFinal.substring(5,7) + "-" + dataFinal.substring(0,4)
     }
 
-    const url = `http://localhost:5000/construirTabela?&stdage=${stdage}&fase=${fases}&gender=${gender}&status=${status}&datainicial=${data_inicial}&datafinal=${data_final}`
-    props.setUrl(url)
-    console.log(url)
+    props.setUrl(`http://localhost:5000/construirTabela?&stdage=${stdage}&fase=${fases}&gender=${gender}&tipo=farma_clinica&status=${status}&datainicial=${data_inicial}&datafinal=${data_final}&inversed=${inversed}&simetric=${simetric}&sort_externo=${sort_externo}&sort_interno=${sort_interno}}`)
+   
 
-  }, [fasesSelecionadas, stdAgesSelecionadas, gendersSelecionados, statusSelecionados, dataInicial, dataFinal])
+  }, [fasesSelecionadas, stdAgesSelecionadas, gendersSelecionados, statusSelecionados, dataInicial, dataFinal, inversed, simetric, sort_externo, sort_interno])
 
 
-  console.log(fasesSelecionadas);
-  console.log(stdAgesSelecionadas);
-  console.log(gendersSelecionados);
-  console.log(statusSelecionados);
-  console.log(dataInicial);
-  console.log(dataFinal);
+ 
 
 
   const handleFaseChange = (event) => {
@@ -164,6 +164,27 @@ const FiltroTabela = (props) => {
     const { value } = event.target;
     setDataFinal(value);
   };
+
+  const handleInversedChange = (event) => {
+    const { value } = event.target;
+    setInversed(!inversed)
+  }
+
+  const handleSimetricChange = (event) => {
+    const { value } = event.target;
+    setSimetric(!simetric)
+  }
+
+  const handleSortExternoChange = (event) => {
+    const { value } = event.target;
+    setSort_externo(!sort_externo)
+  }
+
+  const andleSortInternoChange = (event) => {
+    const { value } = event.target;
+    setSort_interno(!sort_interno)
+  }
+
 
   return (
     <div className={styles.container}>
@@ -382,6 +403,22 @@ const FiltroTabela = (props) => {
             />
           </div>
         </div>
+      </div>
+
+      <div>
+        <input type='checkbox' value='inversed' onChange={handleInversedChange} />
+        <label>Inversed</label>
+
+        <input type='checkbox' defaultChecked value='simetric' onChange={handleSimetricChange} />
+        <label>Simetric</label>
+
+        <input type='checkbox' defaultChecked  value='sort_externo' onChange={handleSortExternoChange} />
+        <label>Sort Externo</label>
+
+        <input type='checkbox' defaultChecked value='sort_interno' onChange={andleSortInternoChange} />
+        <label>Sort Interno</label>
+
+
       </div>
 
       {/* Aqui você pode adicionar a tabela ou qualquer outro conteúdo relacionado */}
