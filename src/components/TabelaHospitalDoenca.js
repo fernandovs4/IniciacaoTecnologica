@@ -1,28 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import './Tabela.css';
+import * as XLSX from 'xlsx';
 
 const TabelaHospitalDoenca = ({dados}) => {
   const [data, setData] = useState([]);
   const [linhasSelecionadas, setLinhasSelecionadas] = useState([]);
   const [colunasSelecionadas, setColunasSelecionadas] = useState([]);
   const [checkboxStatus, setCheckboxStatus] = useState({});
-
-  // useEffect(() => {
-  //   // Fazer a solicitação HTTP para a rota
-  //   fetch('http://localhost:5000/construirTabela?&stdage=todas&fase=todas&gender=todas&tipo=farma_condicao&inversed=false&simetric=false&sort_externo=true&sort_interno=true')
-  //     .then((response) => response.json())
-  //     .then((responseData) => {
-  //       setData(responseData);
-  //       const initialCheckboxStatus = {};
-
-  //       for (const doenca of Object.keys(responseData)) {
-  //         initialCheckboxStatus[doenca] = false;
-  //       }
-
-  //       setCheckboxStatus(initialCheckboxStatus);
-  //     })
-  //     .catch((error) => console.error('Erro na solicitação: ', error));
-  // }, []);
-  console.log(data)
+  
   useEffect(() => {
     
         setData(dados);
@@ -43,7 +28,12 @@ const TabelaHospitalDoenca = ({dados}) => {
   }
    
    const doencas = Object.keys(data);
-   const hospitais = Object.keys(data[doencas[0]]);
+   let hospitais = [];
+
+
+   for (let i = 0; i < doencas.length ; i++){
+    hospitais = [...hospitais, ...Object.keys(data[doencas[i]]).filter((item) => !hospitais.includes(item))]
+   }
   
 
 
@@ -89,17 +79,46 @@ const TabelaHospitalDoenca = ({dados}) => {
     setData(newData);
     setColunasSelecionadas([]);
   };
+  const handleExportToExcel = () => {
+    const ws = XLSX.utils.aoa_to_sheet([
+      [null, ...hospitais],
+      ...doencas.map((doenca) => [doenca, ...hospitais.map((hospital) => data[doenca][hospital])]),
+    ]);
+
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'TabelaHospitalDoenca');
+
+    // Use type: 'array' em vez de type: 'blob'
+    const excelBuffer = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+
+    // Crie um Blob a partir do array e crie um link de download
+    const blob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'tabela_hospital_doenca.xlsx';
+    a.click();
+    URL.revokeObjectURL(url);
+  };
 
   return (
     <div>
-      <button onClick={handleExcluirLinhasSelecionadas}>Excluir Linhas Selecionadas</button>
-      <button onClick={handleExcluirColunasSelecionadas}>Excluir Colunas Selecionadas</button>
+      <div className='btn-botoes' >
+        <div>
+            <button onClick={handleExcluirLinhasSelecionadas}>Excluir Linhas Selecionadas</button>
+            <button onClick={handleExcluirColunasSelecionadas}>Excluir Colunas Selecionadas</button>
+        </div>
+        <div>
+            <button onClick={handleExportToExcel}>Exportar para Excel</button>
+        </div>
+      </div>
+      <div className='container_tabela' >
       <table>
         <thead>
           <tr>
-            <th>Doenças</th>
+          <th className="sticky_header">Doenças</th>
             {hospitais.map((hospital, index) => (
-              <th onClick={() => handleColunaSelecionada(hospital)} key={index} className="hoverable">
+              <th className="sticky_header hoverable" onClick={() => handleColunaSelecionada(hospital)} key={index} >
                 <input
                   type="checkbox"
                   checked={checkboxStatus[hospital]}
@@ -115,8 +134,8 @@ const TabelaHospitalDoenca = ({dados}) => {
         <tbody>
           {doencas.map((doenca, index) => (
             <tr key={index}>
-              <td  onClick={() => handleLinhaSelecionada(doenca)}
-                  className="hoverable">
+              <td   onClick={() => handleLinhaSelecionada(doenca)}
+                  className="hoverable sticky_cell">
                 <input
                   type="checkbox"
                   checked={checkboxStatus[doenca]}
@@ -135,6 +154,9 @@ const TabelaHospitalDoenca = ({dados}) => {
           ))}
         </tbody>
       </table>
+
+      </div>
+     
     </div>
   );
 };

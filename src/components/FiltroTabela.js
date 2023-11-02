@@ -15,6 +15,11 @@ const FiltroTabela = (props) => {
   const [sort_externo, setSort_externo] = useState(true);
   const [sort_interno, setSort_interno] = useState(true);
 
+  const [tipo1, setTipo1] = useState('farma');
+  const [tipo2, setTipo2] = useState('clinica');
+
+  const tipo = tipo1 + '_' + tipo2;
+
   useEffect(() => {
     let fases = '';
     let stdage = '';
@@ -62,11 +67,11 @@ const FiltroTabela = (props) => {
       data_final = dataFinal.substring(8,10) + "-" + dataFinal.substring(5,7) + "-" + dataFinal.substring(0,4)
     }
 
-    props.setUrl(`http://localhost:5000/construirTabela?&stdage=${stdage}&fase=${fases}&gender=${gender}&tipo=farma_clinica&status=${status}&datainicial=${data_inicial}&datafinal=${data_final}&inversed=${inversed}&simetric=${simetric}&sort_externo=${sort_externo}&sort_interno=${sort_interno}}`)
+    props.setUrl(`http://localhost:5000/construirTabela?&stdage=${stdage}&fase=${fases}&gender=${gender}&tipo=${tipo}&status=${status}&datainicial=${data_inicial}&datafinal=${data_final}&inversed=${inversed}&simetric=${simetric}&sort_externo=${sort_externo}&sort_interno=${sort_interno}&totais=true`)
    
 
-  }, [fasesSelecionadas, stdAgesSelecionadas, gendersSelecionados, statusSelecionados, dataInicial, dataFinal, inversed, simetric, sort_externo, sort_interno])
-
+  }, [fasesSelecionadas, stdAgesSelecionadas, gendersSelecionados, statusSelecionados, dataInicial, dataFinal, inversed, simetric, sort_externo, sort_interno, tipo1, tipo2])
+  console.log(tipo)
 
  
 
@@ -184,7 +189,18 @@ const FiltroTabela = (props) => {
     const { value } = event.target;
     setSort_interno(!sort_interno)
   }
+ 
+  const handleChangeTipo1 = (event) => {
+    const value = event.target.value;
+    console.log(value)
+    setTipo1(value);
+  }
 
+  const handleChangeTipo2 = (event) => {
+    const value = event.target.value;
+    console.log(value)
+    setTipo2(value);
+  }
 
   return (
     <div className={styles.container}>
@@ -194,11 +210,11 @@ const FiltroTabela = (props) => {
           <div className={styles.filterGroup}>
             <label>Selecione:</label>
             <div className={styles.dropdownGroup}>
-              <select>
-                <option className={styles.select} value="farmas">
+              <select onChange={handleChangeTipo1} >
+                <option   className={styles.select} value="farma">
                   Farmas
                 </option>
-                <option className={styles.select} value="clinicas">
+                <option className={styles.select} value="clinica">
                   Clínicas
                 </option>
                 <option className={styles.select} value="condicao">
@@ -211,11 +227,11 @@ const FiltroTabela = (props) => {
           <div className={styles.filterGroup}>
             <label>Selecione:</label>
             <div className={styles.dropdownGroup}>
-              <select>
-                <option className={styles.select} value="farmas">
+              <select onChange={handleChangeTipo2} >
+                <option className={styles.select} value="farma">
                   Farmas
                 </option>
-                <option className={styles.select} value="clinicas">
+                <option className={styles.select} value="clinica">
                   Clínicas
                 </option>
                 <option className={styles.select} value="condicao">
@@ -405,7 +421,7 @@ const FiltroTabela = (props) => {
         </div>
       </div>
 
-      <div>
+      <div className='configs_api' >
         <input type='checkbox' value='inversed' onChange={handleInversedChange} />
         <label>Inversed</label>
 

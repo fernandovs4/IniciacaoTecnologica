@@ -174,3 +174,28 @@ tr.focused td {
 }
 
 
+.configs_api{
+  display: flex;
+  justify-content: center;
+  color: rgb(145, 134, 134);
+  font-size: larger;
+  font-weight: 700;
+  margin-left: 1px;
+}
+
+tr:first-child {
+  position: sticky;
+ 
+}
+
+td:first-child {
+  position: sticky;
+  left: 0;
+  background-color:  #f0f0f0;
+  z-index: 1;
+}
+
+
+
+
+
