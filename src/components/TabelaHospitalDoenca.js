@@ -112,7 +112,7 @@ const TabelaHospitalDoenca = ({dados}) => {
             <button onClick={handleExportToExcel}>Exportar para Excel</button>
         </div>
       </div>
-      <div className='container_tabela' >
+ 
       <table>
         <thead>
           <tr>
@@ -154,9 +154,6 @@ const TabelaHospitalDoenca = ({dados}) => {
           ))}
         </tbody>
       </table>
-
-      </div>
-     
     </div>
   );
 };
