@@ -10,15 +10,14 @@ const FiltroTabela = (props) => {
   const [dataFinal, setDataFinal] = useState('2023-01-01');
   const [idade_min, setIdade_min] = useState('');
   const [idade_max, setIdade_max] = useState('');
-  const [inversed, setInversed] = useState(false);
+ 
   const [simetric, setSimetric] = useState(true);
   const [sort_externo, setSort_externo] = useState(true);
   const [sort_interno, setSort_interno] = useState(true);
 
-  const [tipo1, setTipo1] = useState('farma');
-  const [tipo2, setTipo2] = useState('clinica');
+  
 
-  const tipo = tipo1 + '_' + tipo2;
+  const tipo = props.tipo1 + '_' + props.tipo2;
 
   useEffect(() => {
     let fases = '';
@@ -67,10 +66,10 @@ const FiltroTabela = (props) => {
       data_final = dataFinal.substring(8,10) + "-" + dataFinal.substring(5,7) + "-" + dataFinal.substring(0,4)
     }
 
-    props.setUrl(`http://localhost:5000/construirTabela?&stdage=${stdage}&fase=${fases}&gender=${gender}&tipo=${tipo}&status=${status}&datainicial=${data_inicial}&datafinal=${data_final}&inversed=${inversed}&simetric=${simetric}&sort_externo=${sort_externo}&sort_interno=${sort_interno}&totais=true`)
+    props.setUrl(`http://localhost:5000/construirTabela?&stdage=${stdage}&fase=${fases}&gender=${gender}&tipo=${tipo}&status=${status}&datainicial=${data_inicial}&datafinal=${data_final}&inversed=${props.inversed}&simetric=${simetric}&sort_externo=${sort_externo}&sort_interno=${sort_interno}&totais=true`)
    
 
-  }, [fasesSelecionadas, stdAgesSelecionadas, gendersSelecionados, statusSelecionados, dataInicial, dataFinal, inversed, simetric, sort_externo, sort_interno, tipo1, tipo2])
+  }, [fasesSelecionadas, stdAgesSelecionadas, gendersSelecionados, statusSelecionados, dataInicial, dataFinal, props.inversed, simetric, sort_externo, sort_interno, props.tipo1, props.tipo2])
   console.log(tipo)
 
  
@@ -172,7 +171,7 @@ const FiltroTabela = (props) => {
 
   const handleInversedChange = (event) => {
     const { value } = event.target;
-    setInversed(!inversed)
+    props.setInversed(!props.inversed)
   }
 
   const handleSimetricChange = (event) => {
@@ -193,13 +192,13 @@ const FiltroTabela = (props) => {
   const handleChangeTipo1 = (event) => {
     const value = event.target.value;
     console.log(value)
-    setTipo1(value);
+    props.setTipo1(value);
   }
 
   const handleChangeTipo2 = (event) => {
     const value = event.target.value;
     console.log(value)
-    setTipo2(value);
+    props.setTipo2(value);
   }
 
   return (
@@ -208,10 +207,10 @@ const FiltroTabela = (props) => {
         <h2>Filtros de Pesquisa</h2>
         <div className={styles.opcoes}>
           <div className={styles.filterGroup}>
-            <label>Selecione:</label>
+            <label>{props.inversed? ('Selecione a linha:'): ('Selecione a coluna:') }</label>
             <div className={styles.dropdownGroup}>
               <select onChange={handleChangeTipo1} >
-                <option   className={styles.select} value="farma">
+                <option   className={styles.select} value="farma" defaultValue="Farmas">
                   Farmas
                 </option>
                 <option className={styles.select} value="clinica">
@@ -225,15 +224,16 @@ const FiltroTabela = (props) => {
           </div>
 
           <div className={styles.filterGroup}>
-            <label>Selecione:</label>
+            <label>{props.inversed?('Selecione a coluna:') : ('Selecione a linha:')}</label>
             <div className={styles.dropdownGroup}>
-              <select onChange={handleChangeTipo2} >
+              <select onChange={handleChangeTipo2}  >
+               <option className={styles.select} defaultChecked value="clinica"  >
+                  Clínicas
+                </option>
                 <option className={styles.select} value="farma">
                   Farmas
                 </option>
-                <option className={styles.select} value="clinica">
-                  Clínicas
-                </option>
+              
                 <option className={styles.select} value="condicao">
                   Condição
                 </option>

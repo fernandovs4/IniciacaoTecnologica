@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import './Tabela.css';
 import * as XLSX from 'xlsx';
 
-const TabelaHospitalDoenca = ({dados}) => {
+const 
+TabelaHospitalDoenca = ({dados, tipo1, tipo2, inversed}) => {
   const [data, setData] = useState([]);
   const [linhasSelecionadas, setLinhasSelecionadas] = useState([]);
   const [colunasSelecionadas, setColunasSelecionadas] = useState([]);
@@ -112,11 +113,14 @@ const TabelaHospitalDoenca = ({dados}) => {
             <button onClick={handleExportToExcel}>Exportar para Excel</button>
         </div>
       </div>
- 
+      <div>
+        
+      </div>
+      <div className='container-table'>
       <table>
         <thead>
           <tr>
-          <th className="sticky_header">Doenças</th>
+          <th className="sticky_header">{inversed ? tipo2: tipo1}/ <br></br> {inversed? tipo1: tipo2}</th>
             {hospitais.map((hospital, index) => (
               <th className="sticky_header hoverable" onClick={() => handleColunaSelecionada(hospital)} key={index} >
                 <input
@@ -154,6 +158,8 @@ const TabelaHospitalDoenca = ({dados}) => {
           ))}
         </tbody>
       </table>
+      </div>
+      
     </div>
   );
 };
