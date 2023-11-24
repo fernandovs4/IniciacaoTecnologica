@@ -66,7 +66,7 @@ const FiltroTabela = (props) => {
       data_final = dataFinal.substring(8,10) + "-" + dataFinal.substring(5,7) + "-" + dataFinal.substring(0,4)
     }
 
-    props.setUrl(`http://localhost:5000/construirTabela?&stdage=${stdage}&fase=${fases}&gender=${gender}&tipo=${tipo}&status=${status}&datainicial=${data_inicial}&datafinal=${data_final}&inversed=${props.inversed}&simetric=${simetric}&sort_externo=${sort_externo}&sort_interno=${sort_interno}&totais=true`)
+    props.setUrl(`http://localhost:5000/construirTabela?&stdage=${stdage}&fase=${fases}&gender=${gender}&tipo=${tipo}&status=${status}&datainicial=${data_inicial}&datafinal=${data_final}&inversed=${props.inversed}&simetric=${simetric}&sort_externo=${sort_externo}&sort_interno=${sort_interno}&total_externo=true&total_interno=true`)
    
 
   }, [fasesSelecionadas, stdAgesSelecionadas, gendersSelecionados, statusSelecionados, dataInicial, dataFinal, props.inversed, simetric, sort_externo, sort_interno, props.tipo1, props.tipo2])
@@ -219,6 +219,9 @@ const FiltroTabela = (props) => {
                 <option className={styles.select} value="condicao">
                   Condição
                 </option>
+                <option className={styles.select} value="fase">
+                  Fase
+                </option>
               </select>
             </div>
           </div>
@@ -232,10 +235,12 @@ const FiltroTabela = (props) => {
                 </option>
                 <option className={styles.select} value="farma">
                   Farmas
-                </option>
-              
+                </option> 
                 <option className={styles.select} value="condicao">
                   Condição
+                </option>
+                <option className={styles.select} value="fase">
+                  Fase
                 </option>
               </select>
             </div>
@@ -423,16 +428,16 @@ const FiltroTabela = (props) => {
 
       <div className='configs_api' >
         <input type='checkbox' value='inversed' onChange={handleInversedChange} />
-        <label>Inversed</label>
+        <label>Inverter linhas x colunas</label>
 
-        <input type='checkbox' defaultChecked value='simetric' onChange={handleSimetricChange} />
-        <label>Simetric</label>
+        <input type='checkbox'  value='simetric' onChange={handleSimetricChange} />
+        <label>Remover zero das celulas</label>
 
         <input type='checkbox' defaultChecked  value='sort_externo' onChange={handleSortExternoChange} />
-        <label>Sort Externo</label>
+        <label>Ordem descrescente linha</label>
 
         <input type='checkbox' defaultChecked value='sort_interno' onChange={andleSortInternoChange} />
-        <label>Sort Interno</label>
+        <label>Ordem descrescente coluna</label>
 
 
       </div>

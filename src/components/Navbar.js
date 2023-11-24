@@ -23,7 +23,7 @@ const Navbar = ({setControle, setHospitais, setValueHospital, valueHospital}) =>
     
     <div className={styles.buscadaor_header_container}>
       <div className={styles.buscadaor_header_search}>
-        <Link className={styles.link} to="/home">
+        <Link className={styles.link} to="/">
           Home
         </Link>
         <button className={styles.link} onClick={cadastrar_novo_hospital} > Cadastrar novo hospital</button>

@@ -12,7 +12,7 @@ function App() {
 <Router>
       
       <Routes>
-        <Route path="/home" element={<Home />  } />
+        <Route path="/" element={<Home />  } />
         {/* Add more routes for other components if needed */}
         <Route path='/buscador' element={<Buscador></Buscador>} ></Route>
         <Route path='/home/tabela/filtros' element={<Filtros></Filtros>} ></Route>

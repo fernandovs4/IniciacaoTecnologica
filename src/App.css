@@ -199,3 +199,15 @@ td:first-child {
 
 
 
+.dropdown_selection_table{
+  display: flex;
+  flex-direction: column;
+  justify-content:space-between ;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  min-width: 400px;
+  font: optional;
+  font-size: small;
+
+
+}

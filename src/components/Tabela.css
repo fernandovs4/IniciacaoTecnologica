@@ -9,24 +9,26 @@
   th, td {
     border: 1px solid #ddd;
     padding: 8px;
-    text-align: left;
-    width: auto; /* Largura automática das colunas */
+    text-align: center;
+    text-wrap:wrap;
+    width: 100px !important; /* Largura automática das colunas */
   }
   .container-table {
     max-width: 2800px; 
     overflow-x: auto; /* Adicione uma barra de rolagem horizontal se necessário */
   
-    
+    overflow-y:auto;
+    max-height: 900px;
   }
 
 
-    th {
-      background-color: #f2f2f2;
-    }
     th.sticky_header {
       position: sticky;
+      width: 200px !important;
+      min-width: 200px !important;
       top: 0;
       background-color: #f2f2f2;
+      z-index: 1; /* Garante que o cabeçalho esteja acima do conteúdo da tabela */
     }
     
     th.hoverable:hover,
@@ -72,3 +74,22 @@
       margin: 0%;
   }
 
+  tr:first-child {
+  
+    background-color: #c4fac4;
+    z-index: 1;
+  }
+
+  td:nth-child(2) {
+    
+    background-color: #c4fac4;
+    z-index: 1;
+  }
+  th:nth-child(2) {
+    
+    background-color: #c4fac4;
+    z-index: 1;
+  }
+.total{
+  background-color: #c4fac4 !important;
+}
