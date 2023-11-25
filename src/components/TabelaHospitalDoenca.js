@@ -8,17 +8,19 @@ import Select from 'react-select';
 
 
 
-const TabelaHospitalDoenca = ({dados, tipo1, tipo2, inversed}) => {
+const TabelaHospitalDoenca = ({dados, tipo1, tipo2, inversed, setDadosExemplo, dadosCopia, setDadosCopia}) => {
+  
   const [data, setData] = useState([]);
   const [linhasSelecionadas, setLinhasSelecionadas] = useState([]);
   const [colunasSelecionadas, setColunasSelecionadas] = useState([]);
   const [checkboxStatus, setCheckboxStatus] = useState({});
-  
-const [selectedColunas, setSelectedColunas] = useState([]);
-const [selectedLinhas, setSelectedLinhas] = useState([]);
+  const [botaoClicado, setBotaoClicado] = useState(false);
+  const [selectedColunas, setSelectedColunas] = useState([]);
+  const [selectedLinhas, setSelectedLinhas] = useState([]);
 
   useEffect(() => { 
         setData(dados);
+     
         const initialCheckboxStatus = {};
         
         for (const doenca of Object.keys(dados)) {
@@ -28,6 +30,64 @@ const [selectedLinhas, setSelectedLinhas] = useState([]);
         setCheckboxStatus(initialCheckboxStatus);
   }, [dados]);
 
+  const somarValoresDoObjeto = (objeto) => {
+    let soma = 0;
+  
+    // Percorrer as propriedades do objeto e adicionar os valores
+    for (const chave in objeto) {
+      if (objeto.hasOwnProperty(chave)) {
+        soma += objeto[chave];
+      }
+    }
+  
+    return soma;
+  };
+  console.log(dados)
+  const handleClick = () => {
+    
+    const novos_dados = {}
+    let linha = 0;
+    for (linha in selectedLinhas){
+      
+      novos_dados[selectedLinhas[linha].value] = {}
+    }
+   
+    linha = 0;
+    let coluna = 0;
+    for(linha in novos_dados){
+      for (coluna in selectedColunas){
+        novos_dados[linha][selectedColunas[coluna].value] = dadosCopia[linha][selectedColunas[coluna].value]
+      
+      }
+      
+    }
+    for(linha in novos_dados){
+      novos_dados[linha]["Total"] =   somarValoresDoObjeto(novos_dados[linha])
+    }
+    const total = {}
+    for( linha in selectedLinhas){
+      for (coluna in selectedColunas){
+        if (total[selectedColunas[coluna].value] == undefined){
+          total[selectedColunas[coluna].value] = dadosCopia[selectedLinhas[linha].value][selectedColunas[coluna].value]
+        }else{
+          total[selectedColunas[coluna].value] += dadosCopia[selectedLinhas[linha].value][selectedColunas[coluna].value]
+        }
+      }
+   
+      
+
+    }
+    
+    total["Total"] = somarValoresDoObjeto(total)
+    const novo_total = {"Total": total["Total"], ...total}
+
+    console.log(novo_total)
+    novos_dados["Total"] = total
+  
+    setDadosExemplo(novos_dados)
+
+
+  };
 
 
   if (data.length == 0) {
@@ -61,14 +121,23 @@ const [selectedLinhas, setSelectedLinhas] = useState([]);
       setColunasSelecionadas(colunasSelecionadas.filter((item) => item !== hospital));
     }
   };
+
+
+  const doencas_copia = Object.keys(dadosCopia);
+  let hospitais_copia = [];
+
+  for (let i = 0; i < doencas_copia.length ; i++){
+    hospitais_copia = [...hospitais_copia, ...Object.keys(dadosCopia[doencas_copia[i]]).filter((item) => !hospitais_copia.includes(item))]
+  }
   const hospitalOptions = []
-  for (let i = 0; i < hospitais.length; i++){
-    hospitalOptions.push({"value": hospitais[i], "label": hospitais[i]})
+  for (let i = 0; i < hospitais_copia.length; i++){
+    hospitalOptions.push({"value": hospitais_copia[i], "label": hospitais_copia[i]})
   }
 
+
   const doencasOptions = []
-  for (let i = 0; i < doencas.length; i++){
-    doencasOptions.push({"value": doencas[i], "label": doencas[i]})
+  for (let i = 0; i < doencas_copia.length; i++){
+    doencasOptions.push({"value": doencas_copia[i], "label": doencas_copia[i]})
   }
 
   hospitalOptions.sort((a, b) => a.label.localeCompare(b.label))
@@ -121,6 +190,8 @@ const handleDoencaChange = (selectedOption) => {
   setSelectedLinhas(selectedOption);
 }
 
+
+
   return (
     <div>
       <div className='btn-botoes' >
@@ -164,7 +235,7 @@ const handleDoencaChange = (selectedOption) => {
             }}
         />
 
-        <button>Atualizar tabela</button>
+        <button onClick={handleClick} className='btn_update' >Atualizar tabela</button>
 
         </div>
             

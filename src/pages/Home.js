@@ -10,6 +10,7 @@ import '../components/Tabela.css'
 function Home(){
     const [dadosExemplo, setDadosExemplo] = useState({}) // dados = [{}
     const [atualizarTabela, setAtualizarTabela] = useState(true) 
+    const [dadosCopia, setDadosCopia] = useState([])
     const [url, setUrl] = useState('http://localhost:5000/construirTabela?&stdage=todas&fase=todas&gender=todas&tipo=farma_clinica&totais=true&sort_interno=true&sort_externo=true&total_interno=true&total_externo=true&total=true')
     useEffect(() => {
         fetch(url, {
@@ -19,10 +20,11 @@ function Home(){
         .then(dados=> {            
            
             setDadosExemplo(dados)
-
+            setDadosCopia(dados)
         
             setAtualizarTabela(false)
     })
+
 
     }, [url])
     const [tipo1, setTipo1] = useState('farma');
@@ -39,7 +41,7 @@ function Home(){
                 
                 {<FiltroTabela tipo1 = {tipo1} tipo2 = {tipo2} inversed = {inversed} setInversed = {setInversed} setTipo1 = {setTipo1} setTipo2 = {setTipo2} setUrl ={setUrl} ></FiltroTabela>}
 
-            {Object.keys(dadosExemplo).length == 0 ? (<Loading></Loading>):(<TabelaHospitalDoenca tipo1 = {tipo1}  inversed={inversed} tipo2 = {tipo2} dados = {dadosExemplo} ></TabelaHospitalDoenca>) }
+            {Object.keys(dadosExemplo).length == 0 ? (<Loading></Loading>):(<TabelaHospitalDoenca tipo1 = {tipo1}  inversed={inversed} tipo2 = {tipo2} dados = {dadosExemplo} setDadosExemplo = {setDadosExemplo} dadosCopia = {dadosCopia} setDadosCopia = {setDadosCopia}></TabelaHospitalDoenca>) }
         </div>
      
     )

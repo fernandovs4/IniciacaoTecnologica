@@ -3,7 +3,7 @@
   table {
     width: 100%; /* Largura da tabela definida como 800px */
     border-collapse: collapse;
-  
+
   }
 
   th, td {
@@ -19,6 +19,7 @@
   
     overflow-y:auto;
     max-height: 900px;
+    margin-bottom: 100px;
   }
 
 
