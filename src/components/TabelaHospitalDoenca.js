@@ -1,110 +1,91 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './Tabela.css';
-import $ from 'jquery';
 import 'select2/dist/css/select2.min.css';
 import 'select2';
 import * as XLSX from 'xlsx';
 import Select from 'react-select';
 
-
-
 const TabelaHospitalDoenca = ({dados, tipo1, tipo2, inversed, setDadosExemplo, dadosCopia, setDadosCopia}) => {
-  
   const [data, setData] = useState([]);
   const [linhasSelecionadas, setLinhasSelecionadas] = useState([]);
   const [colunasSelecionadas, setColunasSelecionadas] = useState([]);
   const [checkboxStatus, setCheckboxStatus] = useState({});
-  const [botaoClicado, setBotaoClicado] = useState(false);
   const [selectedColunas, setSelectedColunas] = useState([]);
   const [selectedLinhas, setSelectedLinhas] = useState([]);
-
+  
   useEffect(() => { 
         setData(dados);
-     
         const initialCheckboxStatus = {};
-        
         for (const doenca of Object.keys(dados)) {
           initialCheckboxStatus[doenca] = false;
         }
-
         setCheckboxStatus(initialCheckboxStatus);
   }, [dados]);
 
   const somarValoresDoObjeto = (objeto) => {
     let soma = 0;
-  
     // Percorrer as propriedades do objeto e adicionar os valores
     for (const chave in objeto) {
       if (objeto.hasOwnProperty(chave)) {
         soma += objeto[chave];
       }
     }
-  
     return soma;
   };
-  console.log(dados)
   const handleClick = () => {
-    
-    const novos_dados = {}
+    const novos_dados = {};
     let linha = 0;
-    for (linha in selectedLinhas){
-      
-      novos_dados[selectedLinhas[linha].value] = {}
+    
+    // Adicionar o campo "Total" ao início do objeto
+    novos_dados["Total"] = {};
+    
+    for (linha in selectedLinhas) {
+      novos_dados[selectedLinhas[linha].value] = {};
     }
-   
+  
     linha = 0;
     let coluna = 0;
-    for(linha in novos_dados){
-      for (coluna in selectedColunas){
-        novos_dados[linha][selectedColunas[coluna].value] = dadosCopia[linha][selectedColunas[coluna].value]
-      
+    for (linha in novos_dados) {
+      for (coluna in selectedColunas) {
+        novos_dados[linha][selectedColunas[coluna].value] = dadosCopia[linha][selectedColunas[coluna].value];
       }
-      
     }
-    for(linha in novos_dados){
-      novos_dados[linha]["Total"] =   somarValoresDoObjeto(novos_dados[linha])
+  
+    for (linha in novos_dados) {
+      novos_dados[linha]["Total"] = somarValoresDoObjeto(novos_dados[linha]);
     }
-    const total = {}
-    for( linha in selectedLinhas){
-      for (coluna in selectedColunas){
-        if (total[selectedColunas[coluna].value] == undefined){
-          total[selectedColunas[coluna].value] = dadosCopia[selectedLinhas[linha].value][selectedColunas[coluna].value]
-        }else{
-          total[selectedColunas[coluna].value] += dadosCopia[selectedLinhas[linha].value][selectedColunas[coluna].value]
+  
+    const total = {};
+    for (linha in selectedLinhas) {
+      for (coluna in selectedColunas) {
+        if (total[selectedColunas[coluna].value] == undefined) {
+          total[selectedColunas[coluna].value] = dadosCopia[selectedLinhas[linha].value][selectedColunas[coluna].value];
+        } else {
+          total[selectedColunas[coluna].value] += dadosCopia[selectedLinhas[linha].value][selectedColunas[coluna].value];
         }
       }
-   
-      
-
     }
-    
-    total["Total"] = somarValoresDoObjeto(total)
-    const novo_total = {"Total": total["Total"], ...total}
-
-    console.log(novo_total)
-    novos_dados["Total"] = total
   
-    setDadosExemplo(novos_dados)
-
-
+    total["Total"] = somarValoresDoObjeto(total);
+    const novo_total = {"Total": total["Total"], ...total};
+    novos_dados["Total"] = total;
+    setDadosExemplo(novos_dados);
   };
-
+  
 
   if (data.length == 0) {
     console.log("não tem dados")
     return <p>Carregando dados...</p>;
   }
-   
- 
-   const doencas = Object.keys(data);
-   let hospitais = [];
+  
+  const doencas = Object.keys(data);
+  let hospitais = [];
 
-   for (let i = 0; i < doencas.length ; i++){
-    hospitais = [...hospitais, ...Object.keys(data[doencas[i]]).filter((item) => !hospitais.includes(item))]
-   }
+  for (let i = 0; i < doencas.length ; i++){
+  hospitais = [...hospitais, ...Object.keys(data[doencas[i]]).filter((item) => !hospitais.includes(item))]
+  }
   const handleLinhaSelecionada = (doenca) => {
     setCheckboxStatus({ ...checkboxStatus, [doenca]: !checkboxStatus[doenca] });
-
     if (!linhasSelecionadas.includes(doenca)) {
       setLinhasSelecionadas([...linhasSelecionadas, doenca]);
     } else {
@@ -114,7 +95,6 @@ const TabelaHospitalDoenca = ({dados, tipo1, tipo2, inversed, setDadosExemplo, d
 
   const handleColunaSelecionada = (hospital) => {
     setCheckboxStatus({ ...checkboxStatus, [hospital]: !checkboxStatus[hospital] });
-
     if (!colunasSelecionadas.includes(hospital)) {
       setColunasSelecionadas([...colunasSelecionadas, hospital]);
     } else {
@@ -133,7 +113,6 @@ const TabelaHospitalDoenca = ({dados, tipo1, tipo2, inversed, setDadosExemplo, d
   for (let i = 0; i < hospitais_copia.length; i++){
     hospitalOptions.push({"value": hospitais_copia[i], "label": hospitais_copia[i]})
   }
-
 
   const doencasOptions = []
   for (let i = 0; i < doencas_copia.length; i++){
@@ -189,9 +168,6 @@ const handleHospitalChange = (selectedOption) => {
 const handleDoencaChange = (selectedOption) => {
   setSelectedLinhas(selectedOption);
 }
-
-
-
   return (
     <div>
       <div className='btn-botoes' >
@@ -211,7 +187,7 @@ const handleDoencaChange = (selectedOption) => {
             styles={{
               menu: (provided, state) => ({
                 ...provided,
-                zIndex: 2, // ajuste o valor conforme necessário
+                zIndex: 2, 
                 maxWidth: '400px',
               }),
             }}
@@ -236,13 +212,7 @@ const handleDoencaChange = (selectedOption) => {
         />
 
         <button onClick={handleClick} className='btn_update' >Atualizar tabela</button>
-
         </div>
-            
-      
-              
-              
-            
         </div>
         <div>
             <button onClick={handleExportToExcel}>Exportar para Excel</button>
@@ -269,7 +239,6 @@ const handleDoencaChange = (selectedOption) => {
                   checked={checkboxStatus[hospital]}
                   onChange={() => handleColunaSelecionada(hospital)}
                 />
-
                 <span>
                   {hospital}
                 </span>
@@ -286,7 +255,7 @@ const handleDoencaChange = (selectedOption) => {
               className="total hoverable sticky_cell">
               <span
               >
-        {doenca}
+                {doenca}
               </span>
             </td>
             {hospitais.map((hospital, hIndex) => (
@@ -298,7 +267,6 @@ const handleDoencaChange = (selectedOption) => {
             ))}
           </tr>
             ): (
-
             <tr key={index}>
             <td onClick={() => handleLinhaSelecionada(doenca)}
                 className="hoverable sticky_cell">
@@ -310,12 +278,11 @@ const handleDoencaChange = (selectedOption) => {
               <span
                
               >
-        {doenca}
+                    {doenca}
                 
               </span>
             </td>
             {hospitais.map((hospital, hIndex) => (
-              
                 data[doenca][hospital] == "Total"? (
                   <td className='total' key={hIndex}>{data[doenca][hospital]}</td>
                 ):(

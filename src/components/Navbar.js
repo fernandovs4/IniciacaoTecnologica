@@ -26,6 +26,9 @@ const Navbar = ({setControle, setHospitais, setValueHospital, valueHospital}) =>
         <Link className={styles.link} to="/">
           Home
         </Link>
+        <Link className={styles.link} to="/tabela">
+          Tabela
+        </Link>
         <button className={styles.link} onClick={cadastrar_novo_hospital} > Cadastrar novo hospital</button>
         <button className={styles.link} onClick={handleClickSelecaoHospitais} >Seleção Hospitais</button>
         {selecaoHospitais && (

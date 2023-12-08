@@ -35,8 +35,10 @@ function Home(){
     return (
         <div >
                 <div className={styles.buscadaor_header_container}>
-                <Link className={styles.link} to="/buscador" > Buscador </Link>
+                <Link className={styles.link} to="/buscador" > Buscador </Link> 
+                <Link className={styles.link} to="/" > Home </Link>
                 </div>
+                
                    
                 
                 {<FiltroTabela tipo1 = {tipo1} tipo2 = {tipo2} inversed = {inversed} setInversed = {setInversed} setTipo1 = {setTipo1} setTipo2 = {setTipo2} setUrl ={setUrl} ></FiltroTabela>}

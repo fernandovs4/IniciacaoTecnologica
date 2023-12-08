@@ -215,3 +215,86 @@ td:first-child {
 .btn_update{
   max-width: 420px;
 }
+
+
+/* CSS DO DASHBOARD */
+
+.dashboard{
+ 
+}
+.dashboard-header-links{
+
+  padding: 1.2em;
+  display: flex;
+  align-items: center;
+  
+}
+
+
+.dashboard-header-link {
+  display: flex   ;
+  text-decoration: none;
+  margin-left: 10px;
+  color: rgb(255, 255, 255);
+  justify-content:space-between ;
+  font-weight: 900;
+  cursor: pointer;
+  background-color: rgb(85, 230, 97);
+  padding: 8px 10px;
+  border-radius: 5px;
+  align-items: center;
+  border: none;
+    
+
+
+}
+.graficoFase{
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 600px;
+}
+.grafico_fase{
+  width: 500px;
+  height: 300px;
+}
+.content_first, .content_second{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  
+}
+.card_qtd_estudos{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 200px;
+  color: rgb(45, 179, 94);
+  height: 200px;
+  padding: 20px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 5px;
+  border: 1px solid rgb(0, 0, 0);
+}
+
+.card_qtd_estudos h2{
+  color: rgb(81, 212, 20);
+  margin: 0px;
+  padding: 0px;
+}
+
+h5{
+  margin: 0px;
+  padding: 0px;
+  font-size: small;
+  
+}
+.content_third{
+  width: 500px;
+}
