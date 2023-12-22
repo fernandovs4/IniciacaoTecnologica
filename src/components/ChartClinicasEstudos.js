@@ -82,7 +82,7 @@ const ChartClinicasEstudos = () => {
   return (
     <div>
       <div>
-      estudos por centros clínicos <br/>
+      
         <select onChange={handleFaseChange} value={selectedHospital}>
           {Object.keys(dados).map((hospital) => (
             <option key={hospital} value={hospital}>

@@ -94,7 +94,7 @@ const ChartFases = () => {
   return (
     <div>
       <div>
-        estudos por fase <br/>
+        
         <select onChange={handleFaseChange} value={selectedFase}>
           {Object.keys(dados).map((fase) => (
             <option key={fase} value={fase}>

@@ -38,6 +38,7 @@ const Buscador = () => {
       };
       const [controle, setControle] = useState(true);
       console.log(hospitaisSelecionados)
+      console.log(selectedHospital)
     return (
         <>
             {/* <Navbar></Navbar> */}
@@ -57,7 +58,7 @@ const Buscador = () => {
                 setHospitaisNoBancoDeDados = {setHospitaisNoBancoDeDados}>
             </Select>
             {
-                (hospitaisEncontrados.length > 0 || hospitais_registrados.length > 0 || hospitaisSelecionados.length > 0) ? (
+                (hospitaisEncontrados.length > 0 || selectedHospital != '' || hospitais_registrados.length > 0 || hospitaisSelecionados.length > 0) ? (
                     <>
                     <Container customClass = "sendSelected">
                     <SearchBar hospitaisEncontrados ={hospitaisEncontrados} 

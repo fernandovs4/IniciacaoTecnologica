@@ -5,7 +5,6 @@ function SendSelected({hospitaisEncontrados, hospitaisSelecionados,selectedHospi
         if(hospitaisSelecionados.length == 0 && hospitaisEncontrados.length == 0){
             alert("Nenhum hospital selecionado!")
         }else{
-            console.log(hospitaisEncontrados)
             const resposta =  window.confirm("Confirma o envio dos hospitais selecionados para o hospital " + selectedHospital + " ?")
 
         if (resposta){

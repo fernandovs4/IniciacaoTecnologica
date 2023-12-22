@@ -4,7 +4,6 @@ import { useEffect, useRef } from "react";
 function SearchBar(props){
     const campo_input = useRef();
     const atualiza_input = ()=> {
-        console.log("entrou " , campo_input.current)
         campo_input.current.value = props.selectedHospital;
     }
     useEffect(()=>{

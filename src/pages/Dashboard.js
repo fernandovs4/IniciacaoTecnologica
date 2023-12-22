@@ -5,6 +5,7 @@ import ChartFases from "../components/ChartFases";
 import ChartClinicasEstudos from "../components/ChartClinicasEstudos";
 import ChartLineHospitais from "../components/ChartLineHospitais";
 import ChartClinicasCondicao from "../components/ChartClinicasCondicao";
+import StackedBarChart from "../components/StackedBarChart";
 const Dashboard = () => {
 
     const [chartData, setChartData] = useState({})
@@ -29,7 +30,7 @@ const Dashboard = () => {
             setTiposEstudoACamargo(data['tipos_estudo_ac_camargo']['A.C. Camargo'])
             setQtd_estudos_ac_camargo(data['qtd_estudos_ac_camargo'])
             const labels = [{
-                label: 'quantidade de estudos por ano',
+                label: 'estudos',
                 data: [],
                 borderWidth: 4
             }]
@@ -46,7 +47,7 @@ const Dashboard = () => {
 
         })
     }, [])
-  
+    
     return (
         <div>
             <div className="header">
@@ -101,8 +102,8 @@ const Dashboard = () => {
                     <ChartClinicasEstudos />
                     <div className="content_third">
                         hospitais com maiores quantidades de estudos
-                    { (Object.keys(dataLine).length > 0) ? <ChartLineHospitais data={dataLine} /> : (<div>Carregando...</div>)}
-                 
+                    { (Object.keys(dataLine).length > 0) ? <StackedBarChart dados={dataLine} /> : (<div>Carregando...</div>)}
+
                 </div>
                 { (Object.keys(dataLine).length > 0) ? <ChartClinicasCondicao/> : (<div>Carregando...</div>)}
                 </div>

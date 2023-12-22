@@ -24,7 +24,6 @@ useEffect(() => {
         try {
           const response = await fetch(`http://localhost:5000/hospitais?hospital=${props.selectedHospital}&hospital-selecionado=${props.selectedHospital}`);
           const data = await response.json();
-          console.log(data)
           props.setHospitaisRegistrados([...data['hospitais_registrados']]);
           props.setHospitaisSelecionados([ ...data['hospitais_registrados'].filter(el => !props.hospitaisSelecionados.includes(el))]);
           props.setHospitaisNoBancoDeDados([...data['hospitais_registrados']])

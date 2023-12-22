@@ -18,7 +18,6 @@ const ChartClinicasCondicao = () => {
     .then(response => response.json())
     .then(data => {
       let dd = {};
-      console.log(data);
       for (const key in data) {
         const hospital = data[key];
         const novo_dd = {};
@@ -83,7 +82,7 @@ const ChartClinicasCondicao = () => {
   return (
     <div>
       <div>
-      estudos por centros clínicos <br/>
+    
         <select onChange={handleFaseChange} value={selectedHospital}>
           {Object.keys(dados).map((hospital) => (
             <option key={hospital} value={hospital}>

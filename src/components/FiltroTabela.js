@@ -1,16 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Filtro.module.css';
 
+function obterDataFormatada() {
+  const dataAtual = new Date();
+
+  // Obtém o dia, mês e ano
+  const dia = String(dataAtual.getDate()).padStart(2, '0');
+  const mes = String(dataAtual.getMonth() + 1).padStart(2, '0'); // Lembre-se que os meses começam do zero
+  const ano = dataAtual.getFullYear();
+
+  // Retorna a data formatada
+  return `${ano}-${mes}-${dia}`;
+}
+
+
 const FiltroTabela = (props) => {
   const [fasesSelecionadas, setFasesSelecionadas] = useState(['todas']);
   const [stdAgesSelecionadas, setStdAgesSelecionadas] = useState(['todas']);
   const [gendersSelecionados, setGendersSelecionados] = useState(['todas']);
   const [statusSelecionados, setStatusSelecionados] = useState(['todas']);
   const [dataInicial, setDataInicial] = useState('2000-01-01');
-  const [dataFinal, setDataFinal] = useState('2023-01-01');
-  const [idade_min, setIdade_min] = useState('');
-  const [idade_max, setIdade_max] = useState('');
- 
+  console.log(obterDataFormatada())
+  const [dataFinal, setDataFinal] = useState(obterDataFormatada());
   const [simetric, setSimetric] = useState(true);
   const [sort_externo, setSort_externo] = useState(true);
   const [sort_interno, setSort_interno] = useState(true);
@@ -67,12 +78,9 @@ const FiltroTabela = (props) => {
     }
 
     props.setUrl(`http://localhost:5000/construirTabela?&stdage=${stdage}&fase=${fases}&gender=${gender}&tipo=${tipo}&status=${status}&datainicial=${data_inicial}&datafinal=${data_final}&inversed=${props.inversed}&simetric=${simetric}&sort_externo=${sort_externo}&sort_interno=${sort_interno}&total_externo=true&total_interno=true`)
-   
 
   }, [fasesSelecionadas, stdAgesSelecionadas, gendersSelecionados, statusSelecionados, dataInicial, dataFinal, props.inversed, simetric, sort_externo, sort_interno, props.tipo1, props.tipo2])
-  console.log(tipo)
-
- 
+  
 
 
   const handleFaseChange = (event) => {

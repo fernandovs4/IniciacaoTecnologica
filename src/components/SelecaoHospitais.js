@@ -26,7 +26,6 @@ function SelecaoHospitais({setHospitais, setValueHospital, valueHospital}) {
         "hospitais": hospitaisSelecionados
     }
     const deletarSelecionados = () => {
-        console.log("Hospitais selecionados: ", hospitaisSelecionados);
         fetch("http://localhost:5000/cadastros/hospitais", {
             method:'DELETE',
             body:JSON.stringify(sedData),
