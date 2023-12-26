@@ -6,7 +6,7 @@ function SelecaoHospitais({setHospitais, setValueHospital, valueHospital}) {
     const [hospitaisDaSelecao, setHospitaisDaSelecao] = useState([]);
 
     useEffect(() => {
-        fetch("http://localhost:5000/cadastros/hospitais", {
+        fetch("http://18.223.1.172:5000/cadastros/hospitais", {
             method: "GET",
         })
         .then((response) => response.json())
@@ -26,7 +26,7 @@ function SelecaoHospitais({setHospitais, setValueHospital, valueHospital}) {
         "hospitais": hospitaisSelecionados
     }
     const deletarSelecionados = () => {
-        fetch("http://localhost:5000/cadastros/hospitais", {
+        fetch("http://18.223.1.172:5000/cadastros/hospitais", {
             method:'DELETE',
             body:JSON.stringify(sedData),
             headers: {

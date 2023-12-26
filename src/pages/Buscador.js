@@ -16,7 +16,7 @@ const Buscador = () => {
     const pesquisarPalavraChave =  (evt) => {
             const fetchData = async () => {
                 try{
-                    const response = await fetch(`http://localhost:5000/hospitais?hospital=${PesquisadorPalavraChave}&hospital-selecionado=${selectedHospital}`, {
+                    const response = await fetch(`http://18.223.1.172:5000/hospitais?hospital=${PesquisadorPalavraChave}&hospital-selecionado=${selectedHospital}`, {
                         method: 'GET',
                     })
                     const data = await response.json()                    

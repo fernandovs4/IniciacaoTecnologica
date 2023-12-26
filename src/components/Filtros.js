@@ -16,7 +16,7 @@ function Filtros() {
     const [faseEstudos, setFaseEstudos] = useState('');
 
     useEffect(() => {
-        fetch('http://localhost:5000/todosEstudos')
+        fetch('http://18.223.1.172:5000/todosEstudos')
             .then(response => response.json())
             .then(dados => {
                 setEstudos(dados);
@@ -49,7 +49,7 @@ function Filtros() {
     };
 
     useEffect(() => {
-        fetch('http://localhost:5000/farmas')
+        fetch('http://18.223.1.172:5000/farmas')
             .then(response => response.json())
             .then(dados => {
                 setFarmacias(dados.LeadSponsorName);
@@ -58,7 +58,7 @@ function Filtros() {
     }, [opcaoClinicas]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/cadastros/hospitais')
+        fetch('http://18.223.1.172:5000/cadastros/hospitais')
             .then(response => response.json())
             .then(dados => {
                 setClinicas(dados.hospitais);

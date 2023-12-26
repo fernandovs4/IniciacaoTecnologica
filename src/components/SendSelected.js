@@ -14,7 +14,7 @@ function SendSelected({hospitaisEncontrados, hospitaisSelecionados,selectedHospi
     
             
     
-             fetch("http://localhost:5000/apelidos", {
+             fetch("http://18.223.1.172:5000/apelidos", {
                 method:"POST",
                 body:JSON.stringify(sendData),
                 headers: {

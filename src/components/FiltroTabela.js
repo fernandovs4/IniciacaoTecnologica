@@ -77,7 +77,7 @@ const FiltroTabela = (props) => {
       data_final = dataFinal.substring(8,10) + "-" + dataFinal.substring(5,7) + "-" + dataFinal.substring(0,4)
     }
 
-    props.setUrl(`http://localhost:5000/construirTabela?&stdage=${stdage}&fase=${fases}&gender=${gender}&tipo=${tipo}&status=${status}&datainicial=${data_inicial}&datafinal=${data_final}&inversed=${props.inversed}&simetric=${simetric}&sort_externo=${sort_externo}&sort_interno=${sort_interno}&total_externo=true&total_interno=true`)
+    props.setUrl(`http://18.223.1.172:5000/construirTabela?&stdage=${stdage}&fase=${fases}&gender=${gender}&tipo=${tipo}&status=${status}&datainicial=${data_inicial}&datafinal=${data_final}&inversed=${props.inversed}&simetric=${simetric}&sort_externo=${sort_externo}&sort_interno=${sort_interno}&total_externo=true&total_interno=true`)
 
   }, [fasesSelecionadas, stdAgesSelecionadas, gendersSelecionados, statusSelecionados, dataInicial, dataFinal, props.inversed, simetric, sort_externo, sort_interno, props.tipo1, props.tipo2])
   

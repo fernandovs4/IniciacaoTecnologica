@@ -15,7 +15,7 @@ const Dashboard = () => {
     const [tiposEstudoACamargo, setTiposEstudoACamargo] = useState([])
     const [qtd_estudos_ac_camargo, setQtd_estudos_ac_camargo] = useState(0)
     useEffect(() => {
-        fetch('http://172.17.0.2:5000/dashboard', {
+        fetch('http://18.223.1.172:5000/dashboard', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

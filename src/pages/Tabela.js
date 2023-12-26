@@ -11,7 +11,7 @@ function Tabela(){
     const [dadosExemplo, setDadosExemplo] = useState({}) // dados = [{}
     const [atualizarTabela, setAtualizarTabela] = useState(true) 
     const [dadosCopia, setDadosCopia] = useState([])
-    const [url, setUrl] = useState('http://localhost:5000/construirTabela?&stdage=todas&fase=todas&gender=todas&tipo=farma_clinica&totais=true&sort_interno=true&sort_externo=true&total_interno=true&total_externo=true')
+    const [url, setUrl] = useState('http://18.223.1.172:5000/construirTabela?&stdage=todas&fase=todas&gender=todas&tipo=farma_clinica&totais=true&sort_interno=true&sort_externo=true&total_interno=true&total_externo=true')
     useEffect(() => {
         fetch(url, {
             method: 'GET',

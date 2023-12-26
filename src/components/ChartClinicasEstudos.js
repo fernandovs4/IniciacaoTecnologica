@@ -9,7 +9,7 @@ const ChartClinicasEstudos = () => {
   const [chartData, setChartData] = useState({});
 
   useEffect(() => {
-    fetch('http://localhost:5000/construirTabela?&stdage=todas&fase=todas&gender=todas&tipo=farma_clinica&inversed=false&simetric=false&sort_externo=true&sort_interno=true', {
+    fetch('http://18.223.1.172:5000/construirTabela?&stdage=todas&fase=todas&gender=todas&tipo=farma_clinica&inversed=false&simetric=false&sort_externo=true&sort_interno=true', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

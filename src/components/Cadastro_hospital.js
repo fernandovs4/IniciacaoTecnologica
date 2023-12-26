@@ -10,7 +10,7 @@ function Cadastro_hospital(props){
         hospital: valueHospital
     }
     const cadastro_hospital= () => {
-        fetch("http://localhost:5000/cadastros/hospitais", {
+        fetch("http://18.223.1.172:5000/cadastros/hospitais", {
             method: "POST",
             body: JSON.stringify(sendData),
             headers: {
