@@ -6,6 +6,7 @@ import ChartClinicasEstudos from "../components/ChartClinicasEstudos";
 import ChartLineHospitais from "../components/ChartLineHospitais";
 import ChartClinicasCondicao from "../components/ChartClinicasCondicao";
 import StackedBarChart from "../components/StackedBarChart";
+import host from '../constantes'
 const Dashboard = () => {
 
     const [chartData, setChartData] = useState({})
@@ -15,7 +16,7 @@ const Dashboard = () => {
     const [tiposEstudoACamargo, setTiposEstudoACamargo] = useState([])
     const [qtd_estudos_ac_camargo, setQtd_estudos_ac_camargo] = useState(0)
     useEffect(() => {
-        fetch('http://18.223.1.172:5000/dashboard', {
+        fetch(host + '/dashboard?cache=true', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

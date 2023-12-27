@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Filtro.module.css';
-
+import host from '../constantes'
 function obterDataFormatada() {
   const dataAtual = new Date();
 
@@ -77,7 +77,7 @@ const FiltroTabela = (props) => {
       data_final = dataFinal.substring(8,10) + "-" + dataFinal.substring(5,7) + "-" + dataFinal.substring(0,4)
     }
 
-    props.setUrl(`http://18.223.1.172:5000/construirTabela?&stdage=${stdage}&fase=${fases}&gender=${gender}&tipo=${tipo}&status=${status}&datainicial=${data_inicial}&datafinal=${data_final}&inversed=${props.inversed}&simetric=${simetric}&sort_externo=${sort_externo}&sort_interno=${sort_interno}&total_externo=true&total_interno=true`)
+    props.setUrl(`${host}/construirTabela?&stdage=${stdage}&fase=${fases}&gender=${gender}&tipo=${tipo}&status=${status}&datainicial=${data_inicial}&datafinal=${data_final}&inversed=${props.inversed}&simetric=${simetric}&sort_externo=${sort_externo}&sort_interno=${sort_interno}&total_externo=true&total_interno=true`)
 
   }, [fasesSelecionadas, stdAgesSelecionadas, gendersSelecionados, statusSelecionados, dataInicial, dataFinal, props.inversed, simetric, sort_externo, sort_interno, props.tipo1, props.tipo2])
   
@@ -439,18 +439,16 @@ const FiltroTabela = (props) => {
         <label>Inverter linhas x colunas</label>
 
         <input type='checkbox'  value='simetric' onChange={handleSimetricChange} />
-        <label>Remover zero das celulas</label>
+        <label>Remover zero das células</label>
 
         <input type='checkbox' defaultChecked  value='sort_externo' onChange={handleSortExternoChange} />
-        <label>Ordem descrescente linha</label>
+        <label>Ordem decrescente linha</label>
 
         <input type='checkbox' defaultChecked value='sort_interno' onChange={andleSortInternoChange} />
-        <label>Ordem descrescente coluna</label>
+        <label>Ordem decrescente coluna</label>
 
 
       </div>
-
-      {/* Aqui você pode adicionar a tabela ou qualquer outro conteúdo relacionado */}
     </div>
   );
 };

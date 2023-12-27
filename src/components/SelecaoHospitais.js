@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import styles from './SelecaoHospitais.module.css';
-
+import host from '../constantes'
 function SelecaoHospitais({setHospitais, setValueHospital, valueHospital}) {
     const [hospitaisSelecionados, setHospitaisSelecionados] = useState([]);
     const [hospitaisDaSelecao, setHospitaisDaSelecao] = useState([]);
 
     useEffect(() => {
-        fetch("http://18.223.1.172:5000/cadastros/hospitais", {
+        fetch(host + "/cadastros/hospitais", {
             method: "GET",
         })
         .then((response) => response.json())
@@ -26,7 +26,7 @@ function SelecaoHospitais({setHospitais, setValueHospital, valueHospital}) {
         "hospitais": hospitaisSelecionados
     }
     const deletarSelecionados = () => {
-        fetch("http://18.223.1.172:5000/cadastros/hospitais", {
+        fetch(host + "/cadastros/hospitais", {
             method:'DELETE',
             body:JSON.stringify(sedData),
             headers: {

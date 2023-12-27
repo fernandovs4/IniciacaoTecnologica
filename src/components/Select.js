@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import $ from "jquery";
 import "select2/dist/css/select2.min.css";
 import "select2";
+import host from '../constantes'
 import styles from './Select.module.css'
 
 const Select = (props) => {
@@ -9,7 +10,7 @@ const Select = (props) => {
  
 
   useEffect(() => {
-    fetch("http://18.223.1.172:5000/cadastros/hospitais", {
+    fetch(host + "/cadastros/hospitais", {
       method: "GET",
     })
       .then((response) => response.json())

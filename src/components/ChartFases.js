@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Bar } from 'react-chartjs-2';
-
+import host from '../constantes'
 const colors = ['#3498db', '#2ecc71', '#e74c3c', '#f39c12', '#9b59b6', '#34495e', '#1abc9c'];
 
 const ChartFases = () => {
@@ -9,7 +9,7 @@ const ChartFases = () => {
   const [chartData, setChartData] = useState({});
 
   useEffect(() => {
-    fetch('http://18.223.1.172:5000/construirTabela?&stdage=todas&fase=todas&gender=todas&tipo=fase_condicao&inversed=false&simetric=false&sort_externo=true&sort_interno=true', {
+    fetch(host + '/construirTabela?&stdage=todas&fase=todas&gender=todas&tipo=fase_condicao&inversed=false&simetric=false&sort_externo=true&sort_interno=true', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

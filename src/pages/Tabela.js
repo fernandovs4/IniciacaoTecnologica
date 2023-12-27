@@ -7,11 +7,12 @@ import styles from '../components/Navbar.module.css';
 import FiltroTabela from "../components/FiltroTabela";
 import TabelaHospitalDoenca from "../components/TabelaHospitalDoenca";
 import '../components/Tabela.css'
+import host from '../constantes'
 function Tabela(){
     const [dadosExemplo, setDadosExemplo] = useState({}) // dados = [{}
     const [atualizarTabela, setAtualizarTabela] = useState(true) 
     const [dadosCopia, setDadosCopia] = useState([])
-    const [url, setUrl] = useState('http://18.223.1.172:5000/construirTabela?&stdage=todas&fase=todas&gender=todas&tipo=farma_clinica&totais=true&sort_interno=true&sort_externo=true&total_interno=true&total_externo=true')
+    const [url, setUrl] = useState(host + '/construirTabela?&stdage=todas&fase=todas&gender=todas&tipo=farma_clinica&totais=true&sort_interno=true&sort_externo=true&total_interno=true&total_externo=true')
     useEffect(() => {
         fetch(url, {
             method: 'GET',

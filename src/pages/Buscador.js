@@ -6,6 +6,7 @@ import ListRight from '../components/ListRigth'
 import SearchBar from '../components/SearchBar'
 import SendSelected from '../components/SendSelected'
 import Select from '../components/Select'
+import host  from '../constantes'
 const Buscador = () => {
     const [hospitaisEncontrados, setHospitaisNaoSelecionados] = useState([])
     const [hospitais_registrados, setHospitaisRegistrados] = useState([])
@@ -16,7 +17,7 @@ const Buscador = () => {
     const pesquisarPalavraChave =  (evt) => {
             const fetchData = async () => {
                 try{
-                    const response = await fetch(`http://18.223.1.172:5000/hospitais?hospital=${PesquisadorPalavraChave}&hospital-selecionado=${selectedHospital}`, {
+                    const response = await fetch(`${host}hospitais?hospital=${PesquisadorPalavraChave}&hospital-selecionado=${selectedHospital}`, {
                         method: 'GET',
                     })
                     const data = await response.json()                    

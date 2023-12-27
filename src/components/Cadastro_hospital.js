@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react'
 import styles from './Cadastro_hospital.module.css'
-
+import host from '../constantes'
 
 function Cadastro_hospital(props){
     
@@ -10,7 +10,7 @@ function Cadastro_hospital(props){
         hospital: valueHospital
     }
     const cadastro_hospital= () => {
-        fetch("http://18.223.1.172:5000/cadastros/hospitais", {
+        fetch(host + "/cadastros/hospitais", {
             method: "POST",
             body: JSON.stringify(sendData),
             headers: {

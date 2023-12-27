@@ -1,5 +1,5 @@
 import styles from './SendSelected.module.css'
-
+import host from '../constantes'
 function SendSelected({hospitaisEncontrados, hospitaisSelecionados,selectedHospital, setHospitaisSelecionados}){
     const enviarSelecionados  = () =>  {
         if(hospitaisSelecionados.length == 0 && hospitaisEncontrados.length == 0){
@@ -14,7 +14,7 @@ function SendSelected({hospitaisEncontrados, hospitaisSelecionados,selectedHospi
     
             
     
-             fetch("http://18.223.1.172:5000/apelidos", {
+             fetch(host + "/apelidos", {
                 method:"POST",
                 body:JSON.stringify(sendData),
                 headers: {

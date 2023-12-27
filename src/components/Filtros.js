@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from '../components/Filtro.module.css';
-
+import host from '../constantes'
 function Filtros() {
     const [estudos, setEstudos] = useState([]);
     const [estudosCarregados, setEstudosCarregados] = useState(false);
@@ -16,7 +16,7 @@ function Filtros() {
     const [faseEstudos, setFaseEstudos] = useState('');
 
     useEffect(() => {
-        fetch('http://18.223.1.172:5000/todosEstudos')
+        fetch(host + '/todosEstudos')
             .then(response => response.json())
             .then(dados => {
                 setEstudos(dados);
@@ -49,7 +49,7 @@ function Filtros() {
     };
 
     useEffect(() => {
-        fetch('http://18.223.1.172:5000/farmas')
+        fetch(host + '/farmas')
             .then(response => response.json())
             .then(dados => {
                 setFarmacias(dados.LeadSponsorName);
@@ -58,7 +58,7 @@ function Filtros() {
     }, [opcaoClinicas]);
 
     useEffect(() => {
-        fetch('http://18.223.1.172:5000/cadastros/hospitais')
+        fetch(host + '/cadastros/hospitais')
             .then(response => response.json())
             .then(dados => {
                 setClinicas(dados.hospitais);
