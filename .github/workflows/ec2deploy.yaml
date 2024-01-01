@@ -9,7 +9,7 @@ env:
   AWS_PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY }}
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ec2-user-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -29,7 +29,7 @@ jobs:
           tags: fernandowi55/front:latest
   deploy:
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ec2-user-latest
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -44,11 +44,11 @@ jobs:
         chmod 600 key.pem
     - name: Pull Docker image
       run: |
-        ssh -o StrictHostKeyChecking=no -i key.pem  'sudo docker pull fernandowi55/front:latest'
+        ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@172.31.41.111 'sudo docker pull fernandowi55/front:latest'
     - name: Stop running container
       run: |
-        ssh -o StrictHostKeyChecking=no -i key.pem  'sudo docker stop front || true'
-        ssh -o StrictHostKeyChecking=no -i key.pem  'sudo docker rm front || true'
+        ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@172.31.41.111 'sudo docker stop front || true'
+        ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@172.31.41.111 'sudo docker rm front || true'
     - name: Run new container
       run: |
-        ssh -o StrictHostKeyChecking=no -i key.pem  'sudo docker run -d --name front -p 3000:80 fernandowi55/front:latest'
+        ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@172.31.41.111 'sudo docker run -d --name front -p 3000:80 fernandowi55/front:latest'
