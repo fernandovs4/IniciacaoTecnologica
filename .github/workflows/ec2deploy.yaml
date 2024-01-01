@@ -50,3 +50,4 @@ jobs:
           sudo docker rm front-iniciacao || true &&
           sudo docker run --name front-iniciacao -d -p 3000:80 fernandowi55/front:latest'
 
+
