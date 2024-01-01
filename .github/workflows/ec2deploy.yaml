@@ -52,3 +52,4 @@ jobs:
     - name: Run new container
       run: |
         ssh -o StrictHostKeyChecking=no -i private-key.pem ubuntu@ec2-18-223-1-172.us-east-2.compute.amazonaws.com 'sudo docker run -d -p 3000:80 fernandowi55/front:latest'
+        
