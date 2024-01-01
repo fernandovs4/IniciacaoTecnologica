@@ -9,7 +9,7 @@ env:
   AWS_PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY }}
 jobs:
   build:
-    runs-on: ec2-user-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -29,7 +29,7 @@ jobs:
           tags: fernandowi55/front:latest
   deploy:
     needs: build
-    runs-on: ec2-user-latest
+    runs-on: ubuntu-latest
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
