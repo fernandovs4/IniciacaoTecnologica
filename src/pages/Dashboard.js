@@ -61,7 +61,7 @@ const Dashboard = () => {
             <div className="content">
                 <div className="content_first" >
                     <div className="card_qtd_estudos">
-                            <h2>Total de estudos</h2>
+                            <h2>Total</h2>
                             <h1>{qtdEstudos}</h1>
                             <h5>Completed: {tiposEstudos['Completed']}</h5>
                             <h5>Terminated: {tiposEstudos['Terminated']} </h5>

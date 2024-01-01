@@ -8,14 +8,14 @@ const StackedBarChart = ({dados}) => {
     new Set(Object.values(dados).flatMap(clinica => Object.keys(clinica)))
   );
   const clinicas = Object.keys(dados);
-
+  const cores = ['rgba(255,0,0,0.6)', 'rgba(0,255,0,0.6)', 'rgba(0,0,255,0.6)']
   // Inicializar dados para o Chart.js
   const data = {
     labels: anos,
-    datasets: clinicas.map(clinica => ({
+    datasets: clinicas.map((clinica, i) => ({
       label: clinica,
       data: anos.map(ano => dados[clinica][ano] || 0),
-      backgroundColor: getRandomColor(),
+      backgroundColor: cores[i] ,
       borderColor: 'white',
       borderWidth: 1,
     })),
