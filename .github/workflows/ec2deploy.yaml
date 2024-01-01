@@ -38,17 +38,30 @@ jobs:
       with:
         username: ${{ env.DOCKERHUB_USERNAME }}
         password: ${{ env.DOCKERHUB_TOKEN }}
-    - name: Set permissions for private key
-      run: |
-        echo "${{ env.AWS_PRIVATE_KEY }}" > private-key
-        chmod 600 private-key
-    - name: Pull Docker image
-      run: |
-        ssh -o StrictHostKeyChecking=no -i private-key ubuntu@172.31.41.111 'sudo docker pull fernandowi55/front:latest'
-    - name: Stop running container
-      run: |
-        ssh -o StrictHostKeyChecking=no -i private-key ubuntu@172.31.41.111 'sudo docker stop front || true'
-        ssh -o StrictHostKeyChecking=no -i private-key ubuntu@172.31.41.111 'sudo docker rm front || true'
-    - name: Run new container
-      run: |
-        ssh -o StrictHostKeyChecking=no -i private-key ubuntu@172.31.41.111 'sudo docker run -d --name front -p 3000:80 fernandowi55/front:latest'
+    Deploy:
+    name: Deploy to EC2
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2 
+      - name: Build & Deploy
+        env:
+            PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+            
+            USER_NAME: ${{secrets.USER_NAME}}
+
+        run: |
+          echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
+          ssh -o StrictHostKeyChecking=no -i private_key ubuntu@172.31.41.111 '
+
+              # Now we have got the access of EC2 and we will start the deploy .
+              cd /home/ubuntu/<PROJECT_DIRECTORY> &&
+              git checkout dev &&
+              git fetch --all &&
+              git reset --hard origin/dev &&
+              git pull origin dev &&
+              sudo npm i &&
+              sudo npm run build &&
+              sudo pm2 stop ./dist/index.js &&
+              sudo pm2 start ./dist/index.js
+              '
