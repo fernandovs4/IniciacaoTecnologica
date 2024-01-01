@@ -48,3 +48,4 @@ jobs:
           sudo docker pull fernandowi55/front:latest &&
           sudo docker stop $(sudo docker ps -q --filter ancestor=fernandowi55/front:latest) || true &&
           sudo docker run -d -p 3000:80 fernandowi55/front:latest'
+          
