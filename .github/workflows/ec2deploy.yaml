@@ -44,11 +44,11 @@ jobs:
         chmod 600 key.pem
     - name: Pull Docker image
       run: |
-        ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@172-31-41-111 'sudo docker pull fernandowi55/front:latest'
+        ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@172.31.41.111 'sudo docker pull fernandowi55/front:latest'
     - name: Stop running container
       run: |
-        ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@172-31-41-111 'sudo docker stop front || true'
-        ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@172-31-41-111 'sudo docker rm front || true'
+        ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@172.31.41.111 'sudo docker stop front || true'
+        ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@172.31.41.111 'sudo docker rm front || true'
     - name: Run new container
       run: |
-        ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@172-31-41-111 'sudo docker run -d --name front -p 3000:80 fernandowi55/front:latest'
+        ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@172.31.41.111 'sudo docker run -d --name front -p 3000:80 fernandowi55/front:latest'
