@@ -23,7 +23,7 @@ const Select = (props) => {
 useEffect(() => {
       const fetchData = async () => {
         try {
-          const response = await fetch(`http://18.223.1.172:5000/hospitais?hospital=${props.selectedHospital}&hospital-selecionado=${props.selectedHospital}`);
+          const response = await fetch(host + `/hospitais?hospital=${props.selectedHospital}&hospital-selecionado=${props.selectedHospital}`);
           const data = await response.json();
           props.setHospitaisRegistrados([...data['hospitais_registrados']]);
           props.setHospitaisSelecionados([ ...data['hospitais_registrados'].filter(el => !props.hospitaisSelecionados.includes(el))]);
