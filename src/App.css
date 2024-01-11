@@ -299,3 +299,91 @@ h5{
 .content_third{
   width: 500px;
 }
+
+/* app.css */
+/* app.css */
+.container-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f0f0f0;
+  text-align: center;
+  align-items: center;
+}
+
+.welcome-container {
+  text-align: center;
+  margin-top: 5em;
+}
+
+.app-container {
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin: auto;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.green-button {
+  background-color: #4caf50;
+  color: white;
+  font-size: 34px;
+  padding: 20px 40px;
+  margin: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  outline: none;
+  text-decoration: none;
+}
+.green-button:hover{
+  background-color: #515ba2;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #555;
+  margin: 5px;
+  max-width: 300px; /* Adjust the max-width as needed */
+  text-align: center;
+  align-items: center;
+}
+
+
+.welcome-message {
+  display: block;
+}
+
+.welcome-message h2 {
+  color: #333;
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.welcome-message p {
+  color: #555;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.buscador-explicacao {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333333;
+  
+  margin: 2px 50px;
+}
+
+
+
+/* Adicione mais estilos conforme necessário */

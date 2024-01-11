@@ -44,6 +44,14 @@ const Buscador = () => {
         <>
             {/* <Navbar></Navbar> */}
             <Navbar />           
+            <p className='buscador-explicacao'>Bem-vindo ao buscador! É essencial antes de gerar a tabela com todos os estudos associar as várias formas de nomes de
+                 uma clínica (apelidos) com um nome único que representa a clínica. Por exemplo, pro hospital A.C Camargo existe
+                  estudos no qual o seu nome está como a.c camargo, Antonio Prudente, Antônio Prudente, A. Camargo, etc. Dessa forma, 
+                  para a plataforma saber que esses nomes é o hospital A.C. Camargo, faz se necessário o usuário associar esses nomes 
+                  com o nome único (no caso, A.C. Camargo). Para fazer isso, é só selecionar o hospital na caixa abaixo ( se não tiver 
+                  o hospital que você quer, é necessário cadastrá-lo no botão "Cadastrar novo hospital"), com isso o sistema irá trazer algumas varições 
+                  do lado esquerdo, basta clicar nos nomes que corresponde ao hospital selecionado na caixa de hospitais, que o nome será selecionado. Com a finalização
+                  basta clicar em "Enviar Selecionados".</p>
             <p className='buscador_p' >Para começar, selecione o hospital de referência da busca</p>
             <Select
                 setControle ={setControle}

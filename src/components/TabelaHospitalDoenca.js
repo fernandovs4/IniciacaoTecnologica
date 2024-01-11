@@ -172,8 +172,7 @@ const handleDoencaChange = (selectedOption) => {
     <div>
       <div className='btn-botoes' >
         <div>
-            <button onClick={handleExcluirLinhasSelecionadas}>Excluir Linhas Selecionadas</button>
-            <button onClick={handleExcluirColunasSelecionadas}>Excluir Colunas Selecionadas</button>
+           
         <div className='dropdown_selection_table' >
         <h5>Selecione as colunas</h5>
           <Select
@@ -234,11 +233,7 @@ const handleDoencaChange = (selectedOption) => {
               </th>
               ):(
                 <th className="sticky_header hoverable" onClick={() => handleColunaSelecionada(hospital)} key={index} >                
-                <input
-                  type="checkbox"
-                  checked={checkboxStatus[hospital]}
-                  onChange={() => handleColunaSelecionada(hospital)}
-                />
+                
                 <span>
                   {hospital}
                 </span>

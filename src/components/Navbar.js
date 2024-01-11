@@ -29,11 +29,16 @@ const Navbar = ({setControle, setHospitais, setValueHospital, valueHospital}) =>
         <Link className={styles.link} to="/tabela">
           Tabela
         </Link>
-        <button className={styles.link} onClick={cadastrar_novo_hospital} > Cadastrar novo hospital</button>
+      
+      
         <button className={styles.link} onClick={handleClickSelecaoHospitais} >Seleção Hospitais</button>
+        <button className={styles.link} onClick={cadastrar_novo_hospital} > Cadastrar novo hospital</button>
         {selecaoHospitais && (
           <div> <SelecaoHospitais setHospitais= {setHospitais} setValueHospital = {setValueHospital}  valueHospital = {valueHospital}></SelecaoHospitais> </div>
         )}
+        <Link className={styles.link} to="/atualizar">
+          Atualizar banco
+        </Link>
           
         
       </div>
@@ -49,8 +54,9 @@ const Navbar = ({setControle, setHospitais, setValueHospital, valueHospital}) =>
         <Link className={styles.link} to="/tabela">
           Tabela
         </Link>
-        <button className={styles.link} onClick={cadastrar_novo_hospital} > Cadastrar novo hospital</button>
+        
         <button className={styles.link} onClick={handleClickSelecaoHospitais} >Seleção Hospitais</button>
+        <button className={styles.link} onClick={cadastrar_novo_hospital} > Cadastrar novo hospital</button>
         {selecaoHospitais && (
           <div> <SelecaoHospitais setHospitais= {setHospitais} setValueHospital = {setValueHospital}  valueHospital = {valueHospital}></SelecaoHospitais></div>
         )}
