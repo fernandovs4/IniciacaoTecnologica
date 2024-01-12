@@ -13,6 +13,7 @@ RUN npm install
 # Copia os arquivos da aplicação para o diretório de trabalho
 COPY . .
 
+
 # Expõe a porta 3000 (a porta padrão para aplicativos React)
 EXPOSE 3000
 
